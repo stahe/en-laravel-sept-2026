@@ -1,0 +1,1418 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Step-by-Step Introduction to the [Laravel] Web Framework">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/en-laravel-sept-2026/the-lifecycle-of-a-request.html">
+      
+      
+        <link rel="prev" href="data-scopes.html">
+      
+      
+        <link rel="next" href="authentication-and-authorization.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>7. The Lifecycle of a Request - Step-by-Step Introduction to the [Laravel] Web Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Step-by-Step Introduction to the [Laravel] Web Framework";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7-the-lifecycle-of-a-request" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Step-by-Step Introduction to the [Laravel] Web Framework" class="md-header__button md-logo" aria-label="Step-by-Step Introduction to the [Laravel] Web Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Step-by-Step Introduction to the [Laravel] Web Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7. The Lifecycle of a Request
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/en-laravel-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Step-by-Step Introduction to the [Laravel] Web Framework" class="md-nav__button md-logo" aria-label="Step-by-Step Introduction to the [Laravel] Web Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Step-by-Step Introduction to the [Laravel] Web Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/en-laravel-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actions-routing-responses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Actions, Routing, Responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-action-template.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. The Action Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-view-and-its-model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. The View and Its Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internationalization.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Internationalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-scopes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Data Scopes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. The Lifecycle of a Request
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="the-lifecycle-of-a-request.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. The Lifecycle of a Request
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71-example-24-the-steps-in-processing-a-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Example 24: The steps in processing a request
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1. Example 24: The steps in processing a request">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#711-the-global-middleware-apphttpmiddlewarejournalphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.1. The global middleware: app/Http/Middleware/Journal.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#712-the-parameter-mapping-routeswebphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.2. The parameter mapping: routes/web.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#713-the-route-middlewares-bloquerphp-and-chronophp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.3. The route middlewares: Bloquer.php and Chrono.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#714-error-handling-bootstrapappphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.4. Error handling: bootstrap/app.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#715-the-controller-and-the-error-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.5. The controller and the error page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#716-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.6. Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="authentication-and-authorization.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Authentication and Authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="layered-architecture-and-data-access.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Layered Architecture and Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interim-conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Interim Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="case-study-the-rdvmedecins-application.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Case Study: The RdvMedecins Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appendices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Appendices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="7-the-lifecycle-of-a-request">7. <span style="color: #2e74b5">The Lifecycle of a Request</span></h1>
+<p>Between the arrival of a request and the dispatch of its response, <em>[Laravel]</em> goes through several stages, and the application can intervene at each one. We’ve already encountered several of these: middleware (examples 03, 12, 16, 22), route parameter binding (example 12), and exception handlers (examples 08 and 12). This chapter brings them together in a single example, which displays a message in the console at each step so you can observe their order:</p>
+<ul>
+<li><strong>1 and 7. Global middleware</strong>, executed for <strong>all</strong> requests, even before routing. A middleware component <strong>wraps</strong> the rest of the processing: it sees the request pass through before it and the response after it (example 03). <em>[Laravel]</em> installs several by default (empty strings become <strong><em>[null]</em></strong>, maintenance mode, requests become CORS...), in the order of the global middleware list;</li>
+<li><strong>Routing</strong>. <em>[Laravel]</em> searches for the route that matches the URL and the method. If none match, a <strong><em>[NotFoundHttpException]</em></strong> exception is thrown (404);</li>
+<li><strong>The group and route middlewares</strong>, in order: first those of the <strong><em>[web]</em></strong> group (cookies, session, form errors, anti-CSRF protection, parameter binding), then those of the route. One of them, <strong><em>[SubstituteBindings]</em></strong>, <strong>binds</strong> the route parameters (<strong>2</strong>, example 12). The route middleware (<strong>3 and 4</strong>) is the right place for checks specific to certain actions: this is how the <strong><em>[auth]</em></strong> middleware in the next chapter works. If one of them returns a response without calling <strong><em>[$next]</em></strong> (or throws an exception), processing stops there: the action is not called;</li>
+<li><strong>5. The action</strong>, and the view it generates;</li>
+<li><strong>6. The end of the middleware chain</strong>, in <strong>reverse</strong> order: each component receives the response from <strong><em>[$next]</em></strong>, can modify it (add a header or a cookie), and must return it;</li>
+<li><strong>8. The</strong> <strong><em>[terminate]</em></strong> <strong>methods</strong> of the middleware components that have one, executed <strong>after the response is sent</strong> to the browser. They can no longer modify the response: they are used for processing tasks that can wait (writing a log, sending statistics, etc.), without making the user wait;</li>
+<li><strong>x. Exception handlers</strong>: An exception thrown by a middleware component, an action, or a view is passed to the handler (<strong><em>[render]</em></strong>, in <strong><em>[bootstrap/app.php]</em></strong>) registered for its class, which constructs an error response. This response is then passed back up through the middleware components, just like a regular response.</li>
+</ul>
+<p>This is equivalent to the filters in <em>[Java]</em> and the interceptors in <em>[Spring MVC]</em>, the action filters in <em>[ASP.NET Core MVC]</em>, and the functions <strong><em>[before_request]</em></strong> / <strong><em>[after_request]</em></strong> from <em>[Flask]</em>. The distinctive feature of <em>[Laravel]</em> is that almost everything in it is middleware: the same concept is used to process all requests (global middleware), a family of routes (groups), or a few routes.</p>
+<h2 id="71-example-24-the-steps-in-processing-a-request">7.1. <span style="color: #2e74b5">Example 24: The steps in processing a request</span></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>24-cycle-de-vie/
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>├── app/
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>│   └── Http/
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>│       ├── Controllers/
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>│       │   └── CalculController.php
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>│       └── Middleware/
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│           ├── Bloquer.php
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>│           ├── Chrono.php
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>│           └── Journal.php
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>├── bootstrap/
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>│   └── app.php
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>├── resources/
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>│   └── views/
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>│       ├── calcul/
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>│       │   └── resultat.blade.php
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>│       ├── erreur.blade.php
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>│       └── layout.blade.php
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>├── routes/
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>│   └── web.php
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>└── ...
+</code></pre></div></td></tr></table></div>
+<p>The application has only one action, which calculates the square of an integer: <strong><em>[/carre/7]</em></strong>. Depending on URL, it either succeeds or fails in various ways. Messages are written to the server console by the <strong><em>[error_log]</em></strong> function of <em>[PHP]</em>, which is displayed by the <strong><em>[php artisan serve]</em></strong> command.</p>
+<h3 id="711-the-global-middleware-apphttpmiddlewarejournalphp">7.1.1. <span style="color: #1f4d78">The global middleware: app/Http/Middleware/Journal.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="c1">// app/Http/Middleware/Journal.php: a GLOBAL middleware, the first of them all: it</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1">// intercepts every request AVANT as it passes through the rest of the application, and the response APRÈS</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="k">namespace</span> <span class="nx">App\Http\Middleware</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="k">use</span> <span class="nx">Closure</span><span class="p">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="k">class</span> <span class="nc">Journal</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="p">{</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>    <span class="p">{</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>         <span class="c1">// error_log: a message in the development server console</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'--- '</span><span class="o">.</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">()</span><span class="o">.</span><span class="s1">' '</span><span class="o">.</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getRequestUri</span><span class="p">());</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'1. middleware global Journal (avant)'</span><span class="p">);</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>         <span class="c1">// the rest of the process: the other middleware components, routing, the action, the view</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>        <span class="nv">$reponse</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'7. middleware global Journal (après : code '</span><span class="o">.</span><span class="nv">$reponse</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span><span class="o">.</span><span class="s1">')'</span><span class="p">);</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a>        <span class="k">return</span> <span class="nv">$reponse</span><span class="p">;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a>    <span class="p">}</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>lines 16–17: the middleware displays the request (<strong><em>[getRequestUri()]</em></strong>: the path and parameters). This is message #1: nothing has happened yet in <em>[Laravel]</em>, not even routing;</li>
+<li>line 19: the rest of the processing takes place within this call;</li>
+<li>line 20: message #7, once everything else has been completed. <strong><em>[getStatusCode()]</em></strong> is the response code.</li>
+</ul>
+<p>A global middleware does not know the chosen route, since routing has not yet taken place. It is used for processing that applies to all requests: logging, compression, and handling a proxy (the <strong><em>[TrustProxies]</em></strong> middleware from <em>[Laravel]</em> corrects the client’s address when the application is located behind a proxy server; the case study discusses this in relation to the clients’ IP address).</p>
+<h3 id="712-the-parameter-mapping-routeswebphp">7.1.2. <span style="color: #1f4d78">The parameter mapping: routes/web.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="c1">// routes/web.php: the routes from Example 24</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">use</span> <span class="nx">App\Http\Controllers\CalculController</span><span class="p">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="k">use</span> <span class="nx">App\Http\Middleware\Bloquer</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="k">use</span> <span class="nx">App\Http\Middleware\Chrono</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="c1">// a parameter LIAISON: any route parameter named {integer} is transformed</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="c1">// by this function before being applied: an integer, or null if it is</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="c1">// an integer (in which case the action decides)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="nx">Route</span><span class="o">::</span><span class="na">bind</span><span class="p">(</span><span class="s1">'entier'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">string</span> <span class="nv">$valeur</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="nb">error_log</span><span class="p">(</span><span class="s2">"2. liaison du paramètre (valeur reçue : </span><span class="se">\"</span><span class="si">$valeur</span><span class="se">\"</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="nv">$n</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$valeur</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_INT</span><span class="p">);</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="k">return</span> <span class="nv">$n</span> <span class="o">===</span> <span class="k">false</span> <span class="o">?</span> <span class="k">null</span> <span class="o">:</span> <span class="nv">$n</span><span class="p">;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="p">});</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="c1">// the route: two route middlewares, executed in this order, before the action</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'carre/{entier}'</span><span class="p">,</span> <span class="p">[</span><span class="nx">CalculController</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">'carre'</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">'carre'</span><span class="p">)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="o">-&gt;</span><span class="na">middleware</span><span class="p">([</span><span class="nx">Bloquer</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">Chrono</span><span class="o">::</span><span class="na">class</span><span class="p">]);</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>lines 12–16: <strong><em>[Route::bind]</em></strong> registers an <strong>explicit binding</strong>: any route parameter named <strong><em>[{entier}]</em></strong> passes through this function, which receives the text from URL and returns the value that the action will receive. It accepts any text and converts it to an integer, or to <strong><em>[null]</em></strong> if it is not one: unlike <strong><em>[whereNumber]</em></strong> (Example 02), which would return a 404 page for <strong><em>[/carre/abc]</em></strong>, here it is the action that will decide. It displays message #2. This is the other form of the route binding from Example 12, which bound a parameter to a class (<strong><em>[UrlRoutable]</em></strong>);</li>
+<li>Lines 19–20: The route, named <strong><em>[carre]</em></strong>, has two <strong>route middlewares</strong>, which will execute in that order, after those in the <strong><em>[web]</em></strong> group.</li>
+</ul>
+<h3 id="713-the-route-middlewares-bloquerphp-and-chronophp">7.1.3. <span style="color: #1f4d78">The route middlewares: Bloquer.php and Chrono.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="c1">// app/Http/Middleware/Bloquer.php: a middleware module from ROUTE, executed only for</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="c1">// routes that request it</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="k">namespace</span> <span class="nx">App\Http\Middleware</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="k">use</span> <span class="nx">Closure</span><span class="p">;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="k">class</span> <span class="nc">Bloquer</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="p">{</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>    <span class="p">{</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>         <span class="c1">// $request-&gt;route(): the route selected by the routing process; getName(): its name</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'3. middleware Bloquer (route : '</span><span class="o">.</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">route</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span><span class="o">.</span><span class="s1">')'</span><span class="p">);</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">'bloquer'</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a>             <span class="c1">// an exception: the subsequent step (Chrono, the action) is not executed</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a>            <span class="nx">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">);</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a>        <span class="p">}</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a>        <span class="k">return</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="p">}</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Line 16: Message No. 3. A route middleware knows the selected route: <strong><em>[$request-&gt;route()]</em></strong> returns the route, and <strong><em>[getName()] returns</em></strong> its name;</li>
+<li>Lines 17–19: The parameter <strong><em>[?bloquer]</em></strong> of URL (<strong><em>[has]</em></strong> checks for its presence) causes a 403 error (*Forbidden*, access denied): <strong><em>[abort]</em></strong> throws an exception, which interrupts processing.</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#__codelineno-4-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1">// app/Http/Middleware/Chrono.php: a route middleware that triggers AVANT and APRÈS</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1">// the action, then one last time APRÈS sending the response (terminate)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="k">namespace</span> <span class="nx">App\Http\Middleware</span><span class="p">;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="k">use</span> <span class="nx">Closure</span><span class="p">;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="k">class</span> <span class="nc">Chrono</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="p">{</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="p">{</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'4. middleware Chrono (avant)'</span><span class="p">);</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>         <span class="c1">// the start time (hrtime: a precise clock, in nanoseconds), stored</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>         <span class="c1">// in the request attributes (request scope, see Example 12)</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'debut'</span><span class="p">,</span> <span class="nb">hrtime</span><span class="p">(</span><span class="k">true</span><span class="p">));</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>        <span class="nv">$reponse</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'6. middleware Chrono (après : code '</span><span class="o">.</span><span class="nv">$reponse</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span><span class="o">.</span><span class="s1">')'</span><span class="p">);</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>        <span class="k">return</span> <span class="nv">$reponse</span><span class="p">;</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>    <span class="p">}</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>     <span class="c1">// terminate: called at the very end, APRÈS sending the response to the browser;</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>     <span class="c1">// it can no longer modify the response</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">terminate</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$reponse</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>    <span class="p">{</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>        <span class="nv">$debut</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'debut'</span><span class="p">);</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>         <span class="c1">// the measurement has not started if the request was blocked before this middleware</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$debut</span> <span class="o">!==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>            <span class="nv">$ms</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="nb">hrtime</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="o">-</span> <span class="nv">$debut</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">);</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s2">"8. terminate Chrono (fin, </span><span class="si">$ms</span><span class="s2"> ms)"</span><span class="p">);</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>        <span class="p">}</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a>    <span class="p">}</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>lines 15–18: message #4, and the start time, stored in the request attributes (example 12). <strong><em>[hrtime(true)]</em></strong> is a precise clock, in nanoseconds, designed to measure durations;</li>
+<li>Line 20: Message No. 6, after the action, with the response code;</li>
+<li>Lines 26–34: the <strong><em>[terminate]</em></strong> method, called by <em>[Laravel]</em> after the response is sent, with the request and response: message #8, with the time elapsed since message #4. <em>[Laravel]</em> calls it for all middleware components in the route, even if they have not been executed (when a previous middleware component interrupted processing): the check on line 30 verifies that the measurement has started.</li>
+</ul>
+<h3 id="714-error-handling-bootstrapappphp">7.1.4. <span style="color: #1f4d78">Error handling: bootstrap/app.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span>
+<span class="normal"><a href="#__codelineno-5-34">34</a></span>
+<span class="normal"><a href="#__codelineno-5-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// bootstrap/app.php: the application from Example 24</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="k">use</span> <span class="nx">App\Http\Middleware\Journal</span><span class="p">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="k">use</span> <span class="nx">Illuminate\Foundation\Application</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="k">use</span> <span class="nx">Illuminate\Foundation\Configuration\Exceptions</span><span class="p">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="k">use</span> <span class="nx">Illuminate\Foundation\Configuration\Middleware</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\HttpExceptionInterface</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="p">(</span><span class="k">require</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">'/../../vendor/autoload.php'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">addPsr4</span><span class="p">(</span><span class="s1">'App\\'</span><span class="p">,</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">'/../app/'</span><span class="p">);</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="k">return</span> <span class="nx">Application</span><span class="o">::</span><span class="na">configure</span><span class="p">(</span><span class="nx">basePath</span><span class="o">:</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">))</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>    <span class="o">-&gt;</span><span class="na">withRouting</span><span class="p">(</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>        <span class="nx">web</span><span class="o">:</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">'/../routes/web.php'</span><span class="p">,</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>         <span class="c1">// the route used by Bootstrap (see Example 15)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>        <span class="nx">then</span><span class="o">:</span> <span class="nx">fn</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">require</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">'/../../commun/bootstrap.php'</span><span class="p">)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>    <span class="o">-&gt;</span><span class="na">withMiddleware</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Middleware</span> <span class="nv">$middleware</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span> <span class="p">{</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>         <span class="c1">// prepend: the global Journal middleware passes AVANT all others</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a>        <span class="nv">$middleware</span><span class="o">-&gt;</span><span class="na">prepend</span><span class="p">(</span><span class="nx">Journal</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a>    <span class="p">})</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a>    <span class="o">-&gt;</span><span class="na">withExceptions</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Exceptions</span> <span class="nv">$exceptions</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span> <span class="p">{</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a>         <span class="c1">// an “unexpected” exception of a given type: DomainException and its subclasses</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a>        <span class="nv">$exceptions</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">DomainException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s2">"x. render DomainException (</span><span class="si">{</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a>             <span class="c1">// instead of the default error page, our view [erreur], with status code 500</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a>            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">'erreur'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="mi">500</span><span class="p">],</span> <span class="mi">500</span><span class="p">);</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="p">});</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a>         <span class="c1">// errors HTTP (abort(400), abort(403), unknown page -&gt; 404...):</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a>         <span class="c1">// HttpExceptionInterface is the interface for all HTTP exceptions</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a>        <span class="nv">$exceptions</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">HttpExceptionInterface</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s2">"x. render HttpException (code </span><span class="si">{</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32"></a>            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">'erreur'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()],</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">());</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33"></a>        <span class="p">});</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34"></a>    <span class="p">})</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35"></a>    <span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>line 19: <strong><em>[prepend]</em></strong> places the global middleware <strong>at the top</strong> of the list: it runs before all others and sees the response after all others;</li>
+<li>Lines 23–27: An exception handler for the <strong><em>[DomainException]</em></strong> class (and its subclasses; see Example 08): an “unexpected” error is converted into a custom error page with status code 500 (*Internal Server Error*). The exception message is displayed in the console, but not on the page: it may contain internal details that are not relevant to the user;</li>
+<li>lines 30–33: a handler for all HTTP errors. <strong><em>[abort(400)]</em></strong>, <strong><em>[abort(403)]</em></strong>, a URL for a missing route (404), a forbidden method (405): all of them throw an exception that implements the <strong><em>[HttpExceptionInterface]</em></strong> interface from <em>[Symfony]</em>, and which contains its code (<strong><em>[getStatusCode()]</em></strong>). This single handler therefore replaces all English-language error pages from <em>[Laravel]</em> with ours.</li>
+</ul>
+<p><em>[Laravel]</em> passes an exception to the first handler whose parameter type matches it. An exception that has no handler becomes a 500 error: in debug mode, this is the detailed page (example 03); without debug mode, it is the standard 500 error page. There is another, even simpler way to replace error pages: a view named <strong><em>[resources/views/errors/404.blade.php]</em></strong> replaces the 404 error page, and the same applies to every error code (Example 26 uses this approach). The <strong><em>[render]</em></strong> handlers, on the other hand, allow for any type of handling: a log message, a JSON response, a redirect...</p>
+<h3 id="715-the-controller-and-the-error-page">7.1.5. <span style="color: #1f4d78">The controller and the error page</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="c1">// app/Http/Controllers/CalculController.php: an action protected by two middleware components</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="k">use</span> <span class="nx">DomainException</span><span class="p">;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="k">use</span> <span class="nx">Illuminate\View\View</span><span class="p">;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="k">class</span> <span class="nc">CalculController</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="p">{</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>     <span class="c1">// $n: the route parameter {integer}, bound via Route::bind (see routes/web.php);</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>     <span class="c1">// a parameter bound to null is not passed to the action: hence the default value</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">carre</span><span class="p">(</span><span class="o">?</span><span class="nx">int</span> <span class="nv">$n</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span><span class="o">:</span> <span class="nx">View</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>    <span class="p">{</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s2">"5. action carre(</span><span class="si">$n</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">===</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>            <span class="nx">abort</span><span class="p">(</span><span class="mi">400</span><span class="p">);</span>    <span class="c1">// a 400 error: see bootstrap/app.php</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>        <span class="p">}</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">DomainException</span><span class="p">(</span><span class="s1">'13 porte malheur'</span><span class="p">);</span>    <span class="c1">// an “unexpected” error</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a>        <span class="p">}</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a>        <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">'calcul.resultat'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'n'</span> <span class="o">=&gt;</span> <span class="nv">$n</span><span class="p">,</span> <span class="s1">'carre'</span> <span class="o">=&gt;</span> <span class="nv">$n</span> <span class="o">*</span> <span class="nv">$n</span><span class="p">]);</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a>    <span class="p">}</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Line 13: The parameter <strong><em>[$n]</em></strong> receives the value bound by <strong><em>[Route::bind]</em></strong>. <em>[Laravel]</em> does not pass a parameter bound to <strong><em>[null]</em></strong> to the action: the action’s parameter therefore has a default value, <strong><em>[null]</em></strong>, which will be its value in this case;</li>
+<li>line 17: a parameter that is not an integer: error 400;</li>
+<li>line 20: the number 13 causes an “unexpected” error. <strong><em>[DomainException]</em></strong> is an exception class from the standard library of <em>[PHP]</em>;</li>
+<li>line 22: the normal case.</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>@extends('layout')
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>{{-- la page d'erreur ; son modèle : le code d'erreur --}}
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>@section('contenu')
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert alert-danger"</span><span class="p">&gt;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"h4"</span><span class="p">&gt;</span>Erreur {{ $code }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-0"</span><span class="p">&gt;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>      @switch($code)
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>        @case(400) Requête incorrecte. @break
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>        @case(403) Accès refusé. @break
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>        @case(404) Page introuvable. @break
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>        @default Erreur interne du serveur.
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a>      @endswitch
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a>@endsection
+</code></pre></div></td></tr></table></div>
+<p>The error page receives the error code and displays an appropriate message. The <strong><em>[@switch]</em></strong> directive selects a block based on a value: <strong><em>[@case]</em></strong> specifies a value, <strong><em>[@break]</em></strong> ends the block, and <strong><em>[@default]</em></strong> handles the other values. The view <strong><em>[calcul/resultat.blade.php]</em></strong> simply displays the result.</p>
+<h3 id="716-execution">7.1.6. <span style="color: #1f4d78">Execution</span></h3>
+<p>The normal case, <strong><em>[/carre/7]</em></strong>:</p>
+<p><img src="images/10000000000002BE0000006D2DD8A84E.png" width="428" height="66" style="width:11.322cm;height:1.759cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE0000006D2DD8A84E.png" /></p>
+<p>The server console displays the eight steps, in order:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>  --- GET /carre/7
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>  1. middleware global Journal (avant)
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>  2. liaison du paramètre (valeur reçue : "7")
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>  3. middleware Bloquer (route : carre)
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>  4. middleware Chrono (avant)
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>  5. action carre(7)
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>  6. middleware Chrono (après : code 200)
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>  7. middleware global Journal (après : code 200)
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>  8. terminate Chrono (fin, 5 ms)
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>  2026-09-26 18:19:51 /carre/7 ..................................... ~ 0.35ms
+</code></pre></div></td></tr></table></div>
+<p>The last line is the development server log, written once the request is complete. A blocked access, <strong><em>[/carre/7?bloquer]</em></strong>:</p>
+<p><img src="images/10000000000002BE000000B79150101D.png" width="428" height="112" style="width:11.322cm;height:2.951cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000000B79150101D.png" /></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>  --- GET /carre/7?bloquer
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>  1. middleware global Journal (avant)
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>  2. liaison du paramètre (valeur reçue : "7")
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>  3. middleware Bloquer (route : carre)
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>  x. render HttpException (code 403)
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>  7. middleware global Journal (après : code 403)
+</code></pre></div></td></tr></table></div>
+<p>The first route middleware threw an exception: the second middleware and the action were not executed. The error response, generated by the handler, is passed up to the global middleware. <strong><em>[terminate]</em></strong> was called but did not display anything, as the measurement did not start. A parameter that is not an integer, <strong><em>[/carre/abc]</em></strong>:</p>
+<p><img src="images/10000000000002BE000000B72D7479C9.png" width="428" height="112" style="width:11.322cm;height:2.951cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000000B72D7479C9.png" /></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>  --- GET /carre/abc
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>  1. middleware global Journal (avant)
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>  2. liaison du paramètre (valeur reçue : "abc")
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>  3. middleware Bloquer (route : carre)
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>  4. middleware Chrono (avant)
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>  5. action carre()
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>  x. render HttpException (code 400)
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>  6. middleware Chrono (après : code 400)
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>  7. middleware global Journal (après : code 400)
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>  8. terminate Chrono (fin, 6 ms)
+</code></pre></div></td></tr></table></div>
+<p>This time, the action was called with <strong><em>[null]</em></strong> (which is rendered as an empty string: <strong><em>[carre()]</em></strong>), and it was this action that raised the 400 error. An “unexpected” error, <strong><em>[/carre/13]</em></strong>:</p>
+<p><img src="images/10000000000002BE000000B7C4369549.png" width="428" height="112" style="width:11.322cm;height:2.951cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000000B7C4369549.png" /></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>  --- GET /carre/13
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>  1. middleware global Journal (avant)
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>  2. liaison du paramètre (valeur reçue : "13")
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a>  3. middleware Bloquer (route : carre)
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>  4. middleware Chrono (avant)
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>  5. action carre(13)
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>  x. render DomainException (13 porte malheur)
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a>  6. middleware Chrono (après : code 500)
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>  7. middleware global Journal (après : code 500)
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a>  8. terminate Chrono (fin, 3 ms)
+</code></pre></div></td></tr></table></div>
+<p>The exception was handled by its handler: the user sees the &quot;custom&quot; error page, not the detailed page, even though debug mode is enabled. The exception is still logged in the <strong><em>[storage/logs/laravel.log]</em></strong> log: <em>[Laravel]</em> distinguishes between an exception <strong>report</strong> (*report*, its entry in the log) and its <strong>rendering</strong> (*render*, the response). Finally, a URL that does not correspond to any route, <strong><em>[/inconnu]</em></strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>  --- GET /inconnu
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>  1. middleware global Journal (avant)
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>  x. render HttpException (code 404)
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a>  7. middleware global Journal (après : code 404)
+</code></pre></div></td></tr></table></div>
+<p>Routing failed: no connection, no route middleware, no action. The 404 page is ours:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>curl http://localhost:8000/unknown
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span>
+<span class="normal"><a href="#__codelineno-14-6">6</a></span>
+<span class="normal"><a href="#__codelineno-14-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>...
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert alert-danger"</span><span class="p">&gt;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"h4"</span><span class="p">&gt;</span>Erreur 404<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a>    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-0"</span><span class="p">&gt;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a>       Page introuvable.     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a>...
+</code></pre></div></td></tr></table></div>
+<p>Let’s focus on the essentials. Route middleware is the right place for checks common to many actions (is the user logged in? Do they have permission to access this action?): the next chapter uses it for authentication. Exception handlers and views (<strong><em>[errors/...])</em></strong> ensure that the user never sees a technical page, regardless of the error: the case study takes advantage of this.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        This tutorial, written by Anthropic’s AI <strong>Claude</strong> at the request of <strong>Serge Tahé</strong>, is made available to the public under the terms of the
+        <em>Creative Commons Attribution–NonCommercial–
+        ShareAlike 3.0 Unported</em>.
+
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
