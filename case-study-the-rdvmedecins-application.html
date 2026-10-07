@@ -2225,15 +2225,15 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>APP_ENV=production
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a>APP_DEBUG=false
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a>JWT_SECRET=&lt;une longue chaîne aléatoire&gt;
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a>COOKIE_SECURE=true
+<span class="normal"><a href="#__codelineno-7-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="na">APP_ENV</span><span class="o">=</span><span class="s">production</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="na">APP_DEBUG</span><span class="o">=</span><span class="s">false</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="na">JWT_SECRET</span><span class="o">=</span><span class="s">&lt;une longue chaîne aléatoire&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="na">COOKIE_SECURE</span><span class="o">=</span><span class="s">true</span>
 </code></pre></div></td></tr></table></div>
 <p>A suitable random string can be obtained using <em>[PHP]</em> itself: <strong><em>[php -r &quot;echo bin2hex(random_bytes(32));&quot;]</em></strong>.</p>
 <h3 id="1139-common-issues">11.3.9. <span style="color: #1f4d78">Common Issues</span></h3>
 <p>A <em>[PHP]</em> application fails to “start”: each request rebuilds the application (example 01). An inaccessible database therefore does not prevent the server from launching: the error appears on the first page that queries the database (the login page does not query the database; the login process itself does). With <strong><em>[APP_DEBUG=true]</em></strong>, the error is displayed on the <em>[Laravel]</em> debug page; in all cases, it is logged in the <strong><em>[storage/logs/laravel.log]</em></strong> log. For example, with a database that does not exist:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">[</span><span class="mi">2026</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="mi">18</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span><span class="w"> </span><span class="k">local</span><span class="p">.</span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="k">SQLSTATE</span><span class="p">[</span><span class="n">HY000</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">1049</span><span class="p">]</span><span class="w"> </span><span class="k">Unknown</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="s1">'dbinconnue'</span><span class="w"> </span><span class="p">(</span><span class="k">Connection</span><span class="p">:</span><span class="w"> </span><span class="n">mysql</span><span class="p">,</span><span class="w"> </span><span class="k">Host</span><span class="p">:</span><span class="w"> </span><span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">Port</span><span class="p">:</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="k">Database</span><span class="p">:</span><span class="w"> </span><span class="n">dbinconnue</span><span class="p">,</span><span class="w"> </span><span class="k">SQL</span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="o">`</span><span class="n">users</span><span class="o">`</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="o">`</span><span class="n">login</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">admin</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="ss">"exception"</span><span class="p">:</span><span class="err">"</span><span class="p">[</span><span class="k">object</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="n">Illuminate</span><span class="err">\\</span><span class="k">Database</span><span class="err">\\</span><span class="n">QueryException</span><span class="p">(</span><span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="mi">1049</span><span class="p">):</span><span class="w"> </span><span class="p">...</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>[2026-09-26 18:55:12] local.ERROR: SQLSTATE[HY000] [1049] Unknown database 'dbinconnue' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: dbinconnue, SQL: select * from `users` where `login` = admin limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1049): ...
 </code></pre></div></td></tr></table></div>
 <p>The most common messages:</p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[Failed opening required &#x27;.../vendor/autoload.php&#x27;]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The command <i><b>[composer install] </b></i>was not executed</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[Your Composer dependencies require a PHP version &quot;&gt;= 8.4.0&quot;]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The version of <i>[PHP] </i>is earlier than 8.4</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[could not find driver]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The <i><b>[pdo_mysql]</b></i> extension of <i>[PHP] </i>is not enabled (file <i><b>[php.ini]</b></i>, or menu PHP / Extensions of <i>[Laragon]</i>)</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[SQLSTATE[HY000] [2002] Connection refused]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[MySQL] </i>has not started, or is not listening on <i><b>[127.0.0.1:3306]</b></i></div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[SQLSTATE[HY000] [1045] Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The password for <i>[MySQL] </i>must be entered in <i><b>[.env] </b></i>(see “Configuring Database Access”)</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[SQLSTATE[HY000] [1049] Unknown database &#x27;dbrdvmedecins2&#x27;]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The script <i><b>[database/dbrdvmedecins2.sql] </b></i>was not executed</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[No application encryption key has been specified.]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The variable <i><b>[APP_KEY] </b></i>in the file <i><b>[.env] </b></i>is empty: <i><b>[php artisan key:generate]</b></i></div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[JWT_SECRET doit comporter au moins 32 caractères (cf. .env).]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The secret key for the tokens is too short in <i><b>[.env]</b></i></div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i><b>[Failed to listen on 127.0.0.1:8081 (reason: Address already in use)]</b></i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Port 8081 is already in use (is another version of the application running?): Stop it, or choose a different port</div></td></tr></table>
@@ -2383,138 +2383,138 @@
 <span class="normal"><a href="#__codelineno-9-129">129</a></span>
 <span class="normal"><a href="#__codelineno-9-130">130</a></span>
 <span class="normal"><a href="#__codelineno-9-131">131</a></span>
-<span class="normal"><a href="#__codelineno-9-132">132</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">rdvmedecins2</span><span class="o">-</span><span class="n">laravel</span><span class="o">/</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="err">├── app/</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="err">│   ├── Auth/</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="err">│   │   ├── AuthService.php</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="err">│   │   ├── Captcha.php</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="err">│   │   ├── CaptchaService.php</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="err">│   │   ├── DessinCaptcha.php</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="err">│   │   ├── LimiteurTentatives.php</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="err">│   │   ├── PasseInscription.php</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="err">│   │   ├── README.md</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="err">│   │   ├── SessionInvalide.php</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="err">│   │   └── UtilisateurConnecte.php</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="err">│   ├── Dao/</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="err">│   │   ├── ClientDao.php</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="err">│   │   ├── CreneauDao.php</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="err">│   │   ├── MedecinDao.php</span>
-<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="err">│   │   ├── PersonneDao.php</span>
-<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="err">│   │   ├── README.md</span>
-<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="err">│   │   ├── RvDao.php</span>
-<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="err">│   │   └── UserDao.php</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="err">│   ├── Domain/</span>
-<a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="err">│   │   ├── AgendaMedecinJour.php</span>
-<a id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="err">│   │   ├── CreneauMedecinJour.php</span>
-<a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="err">│   │   └── README.md</span>
-<a id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="err">│   ├── Http/</span>
-<a id="__codelineno-9-26" name="__codelineno-9-26"></a><span class="err">│   │   ├── Controllers/</span>
-<a id="__codelineno-9-27" name="__codelineno-9-27"></a><span class="err">│   │   │   ├── AgendaController.php</span>
-<a id="__codelineno-9-28" name="__codelineno-9-28"></a><span class="err">│   │   │   ├── AuthController.php</span>
-<a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="err">│   │   │   ├── ClientsController.php</span>
-<a id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="err">│   │   │   ├── EspaceController.php</span>
-<a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="err">│   │   │   ├── InscriptionController.php</span>
-<a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="err">│   │   │   ├── LangueController.php</span>
-<a id="__codelineno-9-33" name="__codelineno-9-33"></a><span class="err">│   │   │   ├── MedecinsController.php</span>
-<a id="__codelineno-9-34" name="__codelineno-9-34"></a><span class="err">│   │   │   └── PersonnesController.php</span>
-<a id="__codelineno-9-35" name="__codelineno-9-35"></a><span class="err">│   │   ├── Middleware/</span>
-<a id="__codelineno-9-36" name="__codelineno-9-36"></a><span class="err">│   │   │   ├── ExigerRoles.php</span>
-<a id="__codelineno-9-37" name="__codelineno-9-37"></a><span class="err">│   │   │   ├── FixerLangue.php</span>
-<a id="__codelineno-9-38" name="__codelineno-9-38"></a><span class="err">│   │   │   └── VerifierPasseInscription.php</span>
-<a id="__codelineno-9-39" name="__codelineno-9-39"></a><span class="err">│   │   ├── README.md</span>
-<a id="__codelineno-9-40" name="__codelineno-9-40"></a><span class="err">│   │   └── Requests/</span>
-<a id="__codelineno-9-41" name="__codelineno-9-41"></a><span class="err">│   │       ├── ChampsPersonneRequest.php</span>
-<a id="__codelineno-9-42" name="__codelineno-9-42"></a><span class="err">│   │       ├── InscriptionRequest.php</span>
-<a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="err">│   │       ├── MonCompteRequest.php</span>
-<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="err">│   │       └── PersonneRequest.php</span>
-<a id="__codelineno-9-45" name="__codelineno-9-45"></a><span class="err">│   ├── Metier/</span>
-<a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="err">│   │   ├── Dates.php</span>
-<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="err">│   │   ├── Descripteur.php</span>
-<a id="__codelineno-9-48" name="__codelineno-9-48"></a><span class="err">│   │   ├── DonneesPersonne.php</span>
-<a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="err">│   │   ├── Metier.php</span>
-<a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="err">│   │   ├── MetierException.php</span>
-<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="err">│   │   ├── MetierService.php</span>
-<a id="__codelineno-9-52" name="__codelineno-9-52"></a><span class="err">│   │   └── README.md</span>
-<a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="err">│   ├── Models/</span>
-<a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="err">│   │   ├── Client.php</span>
-<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="err">│   │   ├── Creneau.php</span>
-<a id="__codelineno-9-56" name="__codelineno-9-56"></a><span class="err">│   │   ├── Medecin.php</span>
-<a id="__codelineno-9-57" name="__codelineno-9-57"></a><span class="err">│   │   ├── Personne.php</span>
-<a id="__codelineno-9-58" name="__codelineno-9-58"></a><span class="err">│   │   ├── README.md</span>
-<a id="__codelineno-9-59" name="__codelineno-9-59"></a><span class="err">│   │   ├── Role.php</span>
-<a id="__codelineno-9-60" name="__codelineno-9-60"></a><span class="err">│   │   ├── Rv.php</span>
-<a id="__codelineno-9-61" name="__codelineno-9-61"></a><span class="err">│   │   └── User.php</span>
-<a id="__codelineno-9-62" name="__codelineno-9-62"></a><span class="err">│   ├── Providers/</span>
-<a id="__codelineno-9-63" name="__codelineno-9-63"></a><span class="err">│   │   └── AppServiceProvider.php</span>
-<a id="__codelineno-9-64" name="__codelineno-9-64"></a><span class="err">│   ├── Vues/</span>
-<a id="__codelineno-9-65" name="__codelineno-9-65"></a><span class="err">│   │   ├── AgendaVue.php</span>
-<a id="__codelineno-9-66" name="__codelineno-9-66"></a><span class="err">│   │   ├── ClesPersonnes.php</span>
-<a id="__codelineno-9-67" name="__codelineno-9-67"></a><span class="err">│   │   ├── LigneAgenda.php</span>
-<a id="__codelineno-9-68" name="__codelineno-9-68"></a><span class="err">│   │   ├── OptionVue.php</span>
-<a id="__codelineno-9-69" name="__codelineno-9-69"></a><span class="err">│   │   ├── README.md</span>
-<a id="__codelineno-9-70" name="__codelineno-9-70"></a><span class="err">│   │   ├── RendezVousVue.php</span>
-<a id="__codelineno-9-71" name="__codelineno-9-71"></a><span class="err">│   │   └── ReservationVue.php</span>
-<a id="__codelineno-9-72" name="__codelineno-9-72"></a><span class="err">│   └── Web/</span>
-<a id="__codelineno-9-73" name="__codelineno-9-73"></a><span class="err">│       ├── ApplicationModel.php</span>
-<a id="__codelineno-9-74" name="__codelineno-9-74"></a><span class="err">│       ├── Flash.php</span>
-<a id="__codelineno-9-75" name="__codelineno-9-75"></a><span class="err">│       ├── Message.php</span>
-<a id="__codelineno-9-76" name="__codelineno-9-76"></a><span class="err">│       ├── Outils.php</span>
-<a id="__codelineno-9-77" name="__codelineno-9-77"></a><span class="err">│       └── README.md</span>
-<a id="__codelineno-9-78" name="__codelineno-9-78"></a><span class="err">├── artisan</span>
-<a id="__codelineno-9-79" name="__codelineno-9-79"></a><span class="err">├── bootstrap/</span>
-<a id="__codelineno-9-80" name="__codelineno-9-80"></a><span class="err">│   ├── app.php</span>
-<a id="__codelineno-9-81" name="__codelineno-9-81"></a><span class="err">│   ├── cache/</span>
-<a id="__codelineno-9-82" name="__codelineno-9-82"></a><span class="err">│   └── providers.php</span>
-<a id="__codelineno-9-83" name="__codelineno-9-83"></a><span class="err">├── composer.json</span>
-<a id="__codelineno-9-84" name="__codelineno-9-84"></a><span class="err">├── config/</span>
-<a id="__codelineno-9-85" name="__codelineno-9-85"></a><span class="err">│   ├── app.php</span>
-<a id="__codelineno-9-86" name="__codelineno-9-86"></a><span class="err">│   ├── auth.php</span>
-<a id="__codelineno-9-87" name="__codelineno-9-87"></a><span class="err">│   ├── hashing.php</span>
-<a id="__codelineno-9-88" name="__codelineno-9-88"></a><span class="err">│   ├── rdvmedecins.php</span>
-<a id="__codelineno-9-89" name="__codelineno-9-89"></a><span class="err">│   └── session.php</span>
-<a id="__codelineno-9-90" name="__codelineno-9-90"></a><span class="err">├── database/</span>
-<a id="__codelineno-9-91" name="__codelineno-9-91"></a><span class="err">│   ├── dbrdvmedecins2.sql</span>
-<a id="__codelineno-9-92" name="__codelineno-9-92"></a><span class="err">│   └── README.md</span>
-<a id="__codelineno-9-93" name="__codelineno-9-93"></a><span class="err">├── .env</span>
-<a id="__codelineno-9-94" name="__codelineno-9-94"></a><span class="err">├── .env.example</span>
-<a id="__codelineno-9-95" name="__codelineno-9-95"></a><span class="err">├── lang/</span>
-<a id="__codelineno-9-96" name="__codelineno-9-96"></a><span class="err">│   ├── en.json</span>
-<a id="__codelineno-9-97" name="__codelineno-9-97"></a><span class="err">│   └── fr.json</span>
-<a id="__codelineno-9-98" name="__codelineno-9-98"></a><span class="err">├── public/</span>
-<a id="__codelineno-9-99" name="__codelineno-9-99"></a><span class="err">│   ├── css/</span>
-<a id="__codelineno-9-100" name="__codelineno-9-100"></a><span class="err">│   │   └── styles.css</span>
-<a id="__codelineno-9-101" name="__codelineno-9-101"></a><span class="err">│   ├── index.php</span>
-<a id="__codelineno-9-102" name="__codelineno-9-102"></a><span class="err">│   ├── js/</span>
-<a id="__codelineno-9-103" name="__codelineno-9-103"></a><span class="err">│   │   └── app.js</span>
-<a id="__codelineno-9-104" name="__codelineno-9-104"></a><span class="err">│   └── lib/</span>
-<a id="__codelineno-9-105" name="__codelineno-9-105"></a><span class="err">│       └── bootstrap/</span>
-<a id="__codelineno-9-106" name="__codelineno-9-106"></a><span class="err">├── README.md</span>
-<a id="__codelineno-9-107" name="__codelineno-9-107"></a><span class="err">├── resources/</span>
-<a id="__codelineno-9-108" name="__codelineno-9-108"></a><span class="err">│   └── views/</span>
-<a id="__codelineno-9-109" name="__codelineno-9-109"></a><span class="err">│       ├── agenda.blade.php</span>
-<a id="__codelineno-9-110" name="__codelineno-9-110"></a><span class="err">│       ├── compte.blade.php</span>
-<a id="__codelineno-9-111" name="__codelineno-9-111"></a><span class="err">│       ├── components/</span>
-<a id="__codelineno-9-112" name="__codelineno-9-112"></a><span class="err">│       │   ├── captcha.blade.php</span>
-<a id="__codelineno-9-113" name="__codelineno-9-113"></a><span class="err">│       │   ├── champ.blade.php</span>
-<a id="__codelineno-9-114" name="__codelineno-9-114"></a><span class="err">│       │   └── champs-personne.blade.php</span>
-<a id="__codelineno-9-115" name="__codelineno-9-115"></a><span class="err">│       ├── erreur.blade.php</span>
-<a id="__codelineno-9-116" name="__codelineno-9-116"></a><span class="err">│       ├── espace.blade.php</span>
-<a id="__codelineno-9-117" name="__codelineno-9-117"></a><span class="err">│       ├── fragments/</span>
-<a id="__codelineno-9-118" name="__codelineno-9-118"></a><span class="err">│       │   ├── confirmation.blade.php</span>
-<a id="__codelineno-9-119" name="__codelineno-9-119"></a><span class="err">│       │   ├── erreurs.blade.php</span>
-<a id="__codelineno-9-120" name="__codelineno-9-120"></a><span class="err">│       │   ├── navbar.blade.php</span>
-<a id="__codelineno-9-121" name="__codelineno-9-121"></a><span class="err">│       │   ├── reservation.blade.php</span>
-<a id="__codelineno-9-122" name="__codelineno-9-122"></a><span class="err">│       │   └── succes.blade.php</span>
-<a id="__codelineno-9-123" name="__codelineno-9-123"></a><span class="err">│       ├── inscription.blade.php</span>
-<a id="__codelineno-9-124" name="__codelineno-9-124"></a><span class="err">│       ├── layout.blade.php</span>
-<a id="__codelineno-9-125" name="__codelineno-9-125"></a><span class="err">│       ├── login.blade.php</span>
-<a id="__codelineno-9-126" name="__codelineno-9-126"></a><span class="err">│       ├── personnes/</span>
-<a id="__codelineno-9-127" name="__codelineno-9-127"></a><span class="err">│       │   ├── formulaire.blade.php</span>
-<a id="__codelineno-9-128" name="__codelineno-9-128"></a><span class="err">│       │   └── liste.blade.php</span>
-<a id="__codelineno-9-129" name="__codelineno-9-129"></a><span class="err">│       └── README.md</span>
-<a id="__codelineno-9-130" name="__codelineno-9-130"></a><span class="err">├── routes/</span>
-<a id="__codelineno-9-131" name="__codelineno-9-131"></a><span class="err">│   └── web.php</span>
-<a id="__codelineno-9-132" name="__codelineno-9-132"></a><span class="err">└── storage/</span>
+<span class="normal"><a href="#__codelineno-9-132">132</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>rdvmedecins2-laravel/
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>├── app/
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>│   ├── Auth/
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>│   │   ├── AuthService.php
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>│   │   ├── Captcha.php
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>│   │   ├── CaptchaService.php
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>│   │   ├── DessinCaptcha.php
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>│   │   ├── LimiteurTentatives.php
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>│   │   ├── PasseInscription.php
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>│   │   ├── README.md
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>│   │   ├── SessionInvalide.php
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>│   │   └── UtilisateurConnecte.php
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>│   ├── Dao/
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a>│   │   ├── ClientDao.php
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>│   │   ├── CreneauDao.php
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>│   │   ├── MedecinDao.php
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a>│   │   ├── PersonneDao.php
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>│   │   ├── README.md
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>│   │   ├── RvDao.php
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a>│   │   └── UserDao.php
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a>│   ├── Domain/
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a>│   │   ├── AgendaMedecinJour.php
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a>│   │   ├── CreneauMedecinJour.php
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a>│   │   └── README.md
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a>│   ├── Http/
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a>│   │   ├── Controllers/
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a>│   │   │   ├── AgendaController.php
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a>│   │   │   ├── AuthController.php
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a>│   │   │   ├── ClientsController.php
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a>│   │   │   ├── EspaceController.php
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a>│   │   │   ├── InscriptionController.php
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a>│   │   │   ├── LangueController.php
+<a id="__codelineno-9-33" name="__codelineno-9-33"></a>│   │   │   ├── MedecinsController.php
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a>│   │   │   └── PersonnesController.php
+<a id="__codelineno-9-35" name="__codelineno-9-35"></a>│   │   ├── Middleware/
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a>│   │   │   ├── ExigerRoles.php
+<a id="__codelineno-9-37" name="__codelineno-9-37"></a>│   │   │   ├── FixerLangue.php
+<a id="__codelineno-9-38" name="__codelineno-9-38"></a>│   │   │   └── VerifierPasseInscription.php
+<a id="__codelineno-9-39" name="__codelineno-9-39"></a>│   │   ├── README.md
+<a id="__codelineno-9-40" name="__codelineno-9-40"></a>│   │   └── Requests/
+<a id="__codelineno-9-41" name="__codelineno-9-41"></a>│   │       ├── ChampsPersonneRequest.php
+<a id="__codelineno-9-42" name="__codelineno-9-42"></a>│   │       ├── InscriptionRequest.php
+<a id="__codelineno-9-43" name="__codelineno-9-43"></a>│   │       ├── MonCompteRequest.php
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a>│   │       └── PersonneRequest.php
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a>│   ├── Metier/
+<a id="__codelineno-9-46" name="__codelineno-9-46"></a>│   │   ├── Dates.php
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a>│   │   ├── Descripteur.php
+<a id="__codelineno-9-48" name="__codelineno-9-48"></a>│   │   ├── DonneesPersonne.php
+<a id="__codelineno-9-49" name="__codelineno-9-49"></a>│   │   ├── Metier.php
+<a id="__codelineno-9-50" name="__codelineno-9-50"></a>│   │   ├── MetierException.php
+<a id="__codelineno-9-51" name="__codelineno-9-51"></a>│   │   ├── MetierService.php
+<a id="__codelineno-9-52" name="__codelineno-9-52"></a>│   │   └── README.md
+<a id="__codelineno-9-53" name="__codelineno-9-53"></a>│   ├── Models/
+<a id="__codelineno-9-54" name="__codelineno-9-54"></a>│   │   ├── Client.php
+<a id="__codelineno-9-55" name="__codelineno-9-55"></a>│   │   ├── Creneau.php
+<a id="__codelineno-9-56" name="__codelineno-9-56"></a>│   │   ├── Medecin.php
+<a id="__codelineno-9-57" name="__codelineno-9-57"></a>│   │   ├── Personne.php
+<a id="__codelineno-9-58" name="__codelineno-9-58"></a>│   │   ├── README.md
+<a id="__codelineno-9-59" name="__codelineno-9-59"></a>│   │   ├── Role.php
+<a id="__codelineno-9-60" name="__codelineno-9-60"></a>│   │   ├── Rv.php
+<a id="__codelineno-9-61" name="__codelineno-9-61"></a>│   │   └── User.php
+<a id="__codelineno-9-62" name="__codelineno-9-62"></a>│   ├── Providers/
+<a id="__codelineno-9-63" name="__codelineno-9-63"></a>│   │   └── AppServiceProvider.php
+<a id="__codelineno-9-64" name="__codelineno-9-64"></a>│   ├── Vues/
+<a id="__codelineno-9-65" name="__codelineno-9-65"></a>│   │   ├── AgendaVue.php
+<a id="__codelineno-9-66" name="__codelineno-9-66"></a>│   │   ├── ClesPersonnes.php
+<a id="__codelineno-9-67" name="__codelineno-9-67"></a>│   │   ├── LigneAgenda.php
+<a id="__codelineno-9-68" name="__codelineno-9-68"></a>│   │   ├── OptionVue.php
+<a id="__codelineno-9-69" name="__codelineno-9-69"></a>│   │   ├── README.md
+<a id="__codelineno-9-70" name="__codelineno-9-70"></a>│   │   ├── RendezVousVue.php
+<a id="__codelineno-9-71" name="__codelineno-9-71"></a>│   │   └── ReservationVue.php
+<a id="__codelineno-9-72" name="__codelineno-9-72"></a>│   └── Web/
+<a id="__codelineno-9-73" name="__codelineno-9-73"></a>│       ├── ApplicationModel.php
+<a id="__codelineno-9-74" name="__codelineno-9-74"></a>│       ├── Flash.php
+<a id="__codelineno-9-75" name="__codelineno-9-75"></a>│       ├── Message.php
+<a id="__codelineno-9-76" name="__codelineno-9-76"></a>│       ├── Outils.php
+<a id="__codelineno-9-77" name="__codelineno-9-77"></a>│       └── README.md
+<a id="__codelineno-9-78" name="__codelineno-9-78"></a>├── artisan
+<a id="__codelineno-9-79" name="__codelineno-9-79"></a>├── bootstrap/
+<a id="__codelineno-9-80" name="__codelineno-9-80"></a>│   ├── app.php
+<a id="__codelineno-9-81" name="__codelineno-9-81"></a>│   ├── cache/
+<a id="__codelineno-9-82" name="__codelineno-9-82"></a>│   └── providers.php
+<a id="__codelineno-9-83" name="__codelineno-9-83"></a>├── composer.json
+<a id="__codelineno-9-84" name="__codelineno-9-84"></a>├── config/
+<a id="__codelineno-9-85" name="__codelineno-9-85"></a>│   ├── app.php
+<a id="__codelineno-9-86" name="__codelineno-9-86"></a>│   ├── auth.php
+<a id="__codelineno-9-87" name="__codelineno-9-87"></a>│   ├── hashing.php
+<a id="__codelineno-9-88" name="__codelineno-9-88"></a>│   ├── rdvmedecins.php
+<a id="__codelineno-9-89" name="__codelineno-9-89"></a>│   └── session.php
+<a id="__codelineno-9-90" name="__codelineno-9-90"></a>├── database/
+<a id="__codelineno-9-91" name="__codelineno-9-91"></a>│   ├── dbrdvmedecins2.sql
+<a id="__codelineno-9-92" name="__codelineno-9-92"></a>│   └── README.md
+<a id="__codelineno-9-93" name="__codelineno-9-93"></a>├── .env
+<a id="__codelineno-9-94" name="__codelineno-9-94"></a>├── .env.example
+<a id="__codelineno-9-95" name="__codelineno-9-95"></a>├── lang/
+<a id="__codelineno-9-96" name="__codelineno-9-96"></a>│   ├── en.json
+<a id="__codelineno-9-97" name="__codelineno-9-97"></a>│   └── fr.json
+<a id="__codelineno-9-98" name="__codelineno-9-98"></a>├── public/
+<a id="__codelineno-9-99" name="__codelineno-9-99"></a>│   ├── css/
+<a id="__codelineno-9-100" name="__codelineno-9-100"></a>│   │   └── styles.css
+<a id="__codelineno-9-101" name="__codelineno-9-101"></a>│   ├── index.php
+<a id="__codelineno-9-102" name="__codelineno-9-102"></a>│   ├── js/
+<a id="__codelineno-9-103" name="__codelineno-9-103"></a>│   │   └── app.js
+<a id="__codelineno-9-104" name="__codelineno-9-104"></a>│   └── lib/
+<a id="__codelineno-9-105" name="__codelineno-9-105"></a>│       └── bootstrap/
+<a id="__codelineno-9-106" name="__codelineno-9-106"></a>├── README.md
+<a id="__codelineno-9-107" name="__codelineno-9-107"></a>├── resources/
+<a id="__codelineno-9-108" name="__codelineno-9-108"></a>│   └── views/
+<a id="__codelineno-9-109" name="__codelineno-9-109"></a>│       ├── agenda.blade.php
+<a id="__codelineno-9-110" name="__codelineno-9-110"></a>│       ├── compte.blade.php
+<a id="__codelineno-9-111" name="__codelineno-9-111"></a>│       ├── components/
+<a id="__codelineno-9-112" name="__codelineno-9-112"></a>│       │   ├── captcha.blade.php
+<a id="__codelineno-9-113" name="__codelineno-9-113"></a>│       │   ├── champ.blade.php
+<a id="__codelineno-9-114" name="__codelineno-9-114"></a>│       │   └── champs-personne.blade.php
+<a id="__codelineno-9-115" name="__codelineno-9-115"></a>│       ├── erreur.blade.php
+<a id="__codelineno-9-116" name="__codelineno-9-116"></a>│       ├── espace.blade.php
+<a id="__codelineno-9-117" name="__codelineno-9-117"></a>│       ├── fragments/
+<a id="__codelineno-9-118" name="__codelineno-9-118"></a>│       │   ├── confirmation.blade.php
+<a id="__codelineno-9-119" name="__codelineno-9-119"></a>│       │   ├── erreurs.blade.php
+<a id="__codelineno-9-120" name="__codelineno-9-120"></a>│       │   ├── navbar.blade.php
+<a id="__codelineno-9-121" name="__codelineno-9-121"></a>│       │   ├── reservation.blade.php
+<a id="__codelineno-9-122" name="__codelineno-9-122"></a>│       │   └── succes.blade.php
+<a id="__codelineno-9-123" name="__codelineno-9-123"></a>│       ├── inscription.blade.php
+<a id="__codelineno-9-124" name="__codelineno-9-124"></a>│       ├── layout.blade.php
+<a id="__codelineno-9-125" name="__codelineno-9-125"></a>│       ├── login.blade.php
+<a id="__codelineno-9-126" name="__codelineno-9-126"></a>│       ├── personnes/
+<a id="__codelineno-9-127" name="__codelineno-9-127"></a>│       │   ├── formulaire.blade.php
+<a id="__codelineno-9-128" name="__codelineno-9-128"></a>│       │   └── liste.blade.php
+<a id="__codelineno-9-129" name="__codelineno-9-129"></a>│       └── README.md
+<a id="__codelineno-9-130" name="__codelineno-9-130"></a>├── routes/
+<a id="__codelineno-9-131" name="__codelineno-9-131"></a>│   └── web.php
+<a id="__codelineno-9-132" name="__codelineno-9-132"></a>└── storage/
 </code></pre></div></td></tr></table></div>
 <p>This is the structure of a standard <em>[Laravel]</em> application—the one generated by the <strong><em>[composer create-project laravel/laravel]</em></strong> command (Example 01)—stripped of elements not needed here (tests, migrations, <em>[JavaScript]</em> build tools, etc.). There are two differences from the examples: the application has its own <strong><em>[vendor]</em></strong> folder (the examples shared the one in the <strong><em>[exemples]</em></strong> folder), and a <strong>service provider</strong> (<strong><em>[app/Providers/AppServiceProvider.php]</em></strong>), which is discussed further below. The application’s classes are organized in the <strong><em>[app]</em></strong> folder, according to the PSR-4 rule (Example 01): the <strong><em>[App\Metier\MetierService]</em></strong> class is in the <strong><em>[app/Metier/MetierService.php]</em></strong> file. <em>[Laravel]</em> does not enforce any of these folders (Example 06): <strong><em>[Http]</em></strong>, <strong><em>[Models],</em></strong> and <strong><em>[Providers]</em></strong> are the ones in use; the others (<strong><em>[Auth]</em></strong>, <strong><em>[Dao]</em></strong>, <strong><em>[Metier]</em></strong>...) are part of the layered architecture in Example 28. <em>[Bootstrap]</em> is part of the application (folder <strong><em>[public/lib/bootstrap]</em></strong>) this time: the case study is self-contained.</p>
 <h2 id="115-the-database">11.5. <span style="color: #2e74b5">The database</span></h2>
@@ -2912,33 +2912,33 @@
 <span class="normal"><a href="#__codelineno-11-27">27</a></span>
 <span class="normal"><a href="#__codelineno-11-28">28</a></span>
 <span class="normal"><a href="#__codelineno-11-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="p">{</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="s">"name"</span><span class="p">:</span><span class="w"> </span><span class="s">"rdvmedecins/rdvmedecins2-laravel"</span><span class="p">,</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="s">"description"</span><span class="p">:</span><span class="w"> </span><span class="s">"RdvMedecins : prise de rendez-vous médicaux, pages HTML fabriquées par le serveur (Laravel + Blade)"</span><span class="p">,</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="s">"type"</span><span class="p">:</span><span class="w"> </span><span class="s">"project"</span><span class="p">,</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="s">"license"</span><span class="p">:</span><span class="w"> </span><span class="s">"MIT"</span><span class="p">,</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="s">"require"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="s">"php"</span><span class="p">:</span><span class="w"> </span><span class="s">"^8.4"</span><span class="p">,</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="s">"ext-pdo_mysql"</span><span class="p">:</span><span class="w"> </span><span class="s">"*"</span><span class="p">,</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="s">"laravel/framework"</span><span class="p">:</span><span class="w"> </span><span class="s">"^13.33"</span><span class="p">,</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="s">"firebase/php-jwt"</span><span class="p">:</span><span class="w"> </span><span class="s">"^7.0"</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rdvmedecins/rdvmedecins2-laravel"</span><span class="p">,</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RdvMedecins : prise de rendez-vous médicaux, pages HTML fabriquées par le serveur (Laravel + Blade)"</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project"</span><span class="p">,</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="nt">"require"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="nt">"php"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.4"</span><span class="p">,</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="nt">"ext-pdo_mysql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="nt">"laravel/framework"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^13.33"</span><span class="p">,</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="nt">"firebase/php-jwt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^7.0"</span>
 <a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="s">"autoload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">        </span><span class="s">"psr-4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">            </span><span class="s">"App\\"</span><span class="p">:</span><span class="w"> </span><span class="s">"app/"</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="nt">"autoload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">        </span><span class="nt">"psr-4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">            </span><span class="nt">"App\\"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app/"</span>
 <a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="s">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">        </span><span class="s">"post-autoload-dump"</span><span class="p">:</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">            </span><span class="s">"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"</span><span class="p">,</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">            </span><span class="s">"@php artisan package:discover --ansi"</span>
-<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">        </span><span class="o">]</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">        </span><span class="nt">"post-autoload-dump"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">            </span><span class="s2">"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"</span><span class="p">,</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">            </span><span class="s2">"@php artisan package:discover --ansi"</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">        </span><span class="p">]</span>
 <a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="s">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">        </span><span class="s">"optimize-autoloader"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">        </span><span class="s">"sort-packages"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="nt">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">        </span><span class="nt">"optimize-autoloader"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">        </span><span class="nt">"sort-packages"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">    </span><span class="s">"minimum-stability"</span><span class="p">:</span><span class="w"> </span><span class="s">"stable"</span><span class="p">,</span>
-<a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="w">    </span><span class="s">"prefer-stable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">    </span><span class="nt">"minimum-stability"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stable"</span><span class="p">,</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="w">    </span><span class="nt">"prefer-stable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <ul>
@@ -2997,56 +2997,56 @@
 <span class="normal"><a href="#__codelineno-12-47">47</a></span>
 <span class="normal"><a href="#__codelineno-12-48">48</a></span>
 <span class="normal"><a href="#__codelineno-12-49">49</a></span>
-<span class="normal"><a href="#__codelineno-12-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="gh"># =========================================================================</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="gh"># .env: settings specific to the CETTE installation (read by env('NOM') in the</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="gh"># files in the config folder). This file is never published: it contains</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="gh"># secrets. A system environment variable takes precedence over it.</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="gh"># =========================================================================</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a>APP_NAME=RdvMedecins
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="gh"># local: development; production: in production</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a>APP_ENV=local
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="gh"># the Laravel encryption key (cookies, session). In production:</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="gh"># php artisan key:generate (writes a new key to this file)</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11"></a>APP_KEY=base64:+UmYSB3+TOKSr/f/fiqPCyo5IXFgXOLrvO1II52r+q4=
-<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="gh"># true: an unexpected exception displays the Laravel debug page, along with its</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="gh"># call stack (JAMAIS in production); false: the application’s 500 error page</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14"></a>APP_DEBUG=true
-<a id="__codelineno-12-15" name="__codelineno-12-15"></a>APP_URL=http://localhost:8081
+<span class="normal"><a href="#__codelineno-12-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># =========================================================================</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="c1"># .env: settings specific to the CETTE installation (read by env('NOM') in the</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="c1"># files in the config folder). This file is never published: it contains</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="c1"># secrets. A system environment variable takes precedence over it.</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="c1"># =========================================================================</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="na">APP_NAME</span><span class="o">=</span><span class="s">RdvMedecins</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1"># local: development; production: in production</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="na">APP_ENV</span><span class="o">=</span><span class="s">local</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="c1"># the Laravel encryption key (cookies, session). In production:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="c1"># php artisan key:generate (writes a new key to this file)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="na">APP_KEY</span><span class="o">=</span><span class="s">base64:+UmYSB3+TOKSr/f/fiqPCyo5IXFgXOLrvO1II52r+q4=</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="c1"># true: an unexpected exception displays the Laravel debug page, along with its</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="c1"># call stack (JAMAIS in production); false: the application’s 500 error page</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="na">APP_DEBUG</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="na">APP_URL</span><span class="o">=</span><span class="s">http://localhost:8081</span>
 <a id="__codelineno-12-16" name="__codelineno-12-16"></a>
-<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="gh"># ---- the database MySQL [dbrdvmedecins2] (script: database/dbrdvmedecins2.sql):</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="gh"># the server, its port, the database, the username, and its password (those for</span>
-<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="gh"># Laragon: root, no password)</span>
-<a id="__codelineno-12-20" name="__codelineno-12-20"></a>DB_CONNECTION=mysql
-<a id="__codelineno-12-21" name="__codelineno-12-21"></a>DB_HOST=127.0.0.1
-<a id="__codelineno-12-22" name="__codelineno-12-22"></a>DB_PORT=3306
-<a id="__codelineno-12-23" name="__codelineno-12-23"></a>DB_DATABASE=dbrdvmedecins2
-<a id="__codelineno-12-24" name="__codelineno-12-24"></a>DB_USERNAME=root
-<a id="__codelineno-12-25" name="__codelineno-12-25"></a>DB_PASSWORD=
-<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="gh"># true: the SQL commands sent to the database are displayed in the console</span>
-<a id="__codelineno-12-27" name="__codelineno-12-27"></a>DB_LOG=true
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="c1"># ---- the database MySQL [dbrdvmedecins2] (script: database/dbrdvmedecins2.sql):</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="c1"># the server, its port, the database, the username, and its password (those for</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="c1"># Laragon: root, no password)</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="na">DB_CONNECTION</span><span class="o">=</span><span class="s">mysql</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="na">DB_HOST</span><span class="o">=</span><span class="s">127.0.0.1</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="na">DB_PORT</span><span class="o">=</span><span class="s">3306</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="na">DB_DATABASE</span><span class="o">=</span><span class="s">dbrdvmedecins2</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="na">DB_USERNAME</span><span class="o">=</span><span class="s">root</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="na">DB_PASSWORD</span><span class="o">=</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="c1"># true: the SQL commands sent to the database are displayed in the console</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="na">DB_LOG</span><span class="o">=</span><span class="s">true</span>
 <a id="__codelineno-12-28" name="__codelineno-12-28"></a>
-<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="gh"># ---- the Laravel session (flash messages, anti-CSRF token, re-entry</span>
-<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="gh"># refresh): stored in a cookie CHIFFRÉ; the server does not store anything</span>
-<a id="__codelineno-12-31" name="__codelineno-12-31"></a>SESSION_DRIVER=cookie
-<a id="__codelineno-12-32" name="__codelineno-12-32"></a>SESSION_LIFETIME=120
-<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="gh"># ---- the cache (lists of doctors and clients, CAPTCHAs,</span>
-<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="gh"># attempts, passes): files, in storage/framework/cache</span>
-<a id="__codelineno-12-35" name="__codelineno-12-35"></a>CACHE_STORE=file
-<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="gh"># the log: storage/logs/laravel.log</span>
-<a id="__codelineno-12-37" name="__codelineno-12-37"></a>LOG_CHANNEL=single
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="c1"># ---- the Laravel session (flash messages, anti-CSRF token, re-entry</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="c1"># refresh): stored in a cookie CHIFFRÉ; the server does not store anything</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="na">SESSION_DRIVER</span><span class="o">=</span><span class="s">cookie</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="na">SESSION_LIFETIME</span><span class="o">=</span><span class="s">120</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="c1"># ---- the cache (lists of doctors and clients, CAPTCHAs,</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="c1"># attempts, passes): files, in storage/framework/cache</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="na">CACHE_STORE</span><span class="o">=</span><span class="s">file</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="c1"># the log: storage/logs/laravel.log</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="na">LOG_CHANNEL</span><span class="o">=</span><span class="s">single</span>
 <a id="__codelineno-12-38" name="__codelineno-12-38"></a>
-<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="gh"># ---- authentication (see config/rdvmedecins.php)</span>
-<a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="gh"># secret key for JWT tokens: at least 32 characters (HMAC-SHA256)</span>
-<a id="__codelineno-12-41" name="__codelineno-12-41"></a>JWT_SECRET=ef1cfc9709f10b5b5d183b4deb6d5dbbe69518629c3b12a8
-<a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="gh"># token validity period, in minutes (120 min = 2 h)</span>
-<a id="__codelineno-12-43" name="__codelineno-12-43"></a>JWT_DUREE_MINUTES=120
-<a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="gh"># true in production (site served as HTTPS): cookies are never transmitted in plain text</span>
-<a id="__codelineno-12-45" name="__codelineno-12-45"></a>COOKIE_SECURE=false
+<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="c1"># ---- authentication (see config/rdvmedecins.php)</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="c1"># secret key for JWT tokens: at least 32 characters (HMAC-SHA256)</span>
+<a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="na">JWT_SECRET</span><span class="o">=</span><span class="s">ef1cfc9709f10b5b5d183b4deb6d5dbbe69518629c3b12a8</span>
+<a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="c1"># token validity period, in minutes (120 min = 2 h)</span>
+<a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="na">JWT_DUREE_MINUTES</span><span class="o">=</span><span class="s">120</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="c1"># true in production (site served as HTTPS): cookies are never transmitted in plain text</span>
+<a id="__codelineno-12-45" name="__codelineno-12-45"></a><span class="na">COOKIE_SECURE</span><span class="o">=</span><span class="s">false</span>
 <a id="__codelineno-12-46" name="__codelineno-12-46"></a>
-<a id="__codelineno-12-47" name="__codelineno-12-47"></a><span class="gh"># ---- protection against bots (see app/Auth/LimiteurTentatives.php)</span>
-<a id="__codelineno-12-48" name="__codelineno-12-48"></a>LOGIN_MAX_ECHECS=5
-<a id="__codelineno-12-49" name="__codelineno-12-49"></a>LOGIN_BLOCAGE_MINUTES=15
-<a id="__codelineno-12-50" name="__codelineno-12-50"></a>INSCRIPTION_MAX_PAR_HEURE=10
+<a id="__codelineno-12-47" name="__codelineno-12-47"></a><span class="c1"># ---- protection against bots (see app/Auth/LimiteurTentatives.php)</span>
+<a id="__codelineno-12-48" name="__codelineno-12-48"></a><span class="na">LOGIN_MAX_ECHECS</span><span class="o">=</span><span class="s">5</span>
+<a id="__codelineno-12-49" name="__codelineno-12-49"></a><span class="na">LOGIN_BLOCAGE_MINUTES</span><span class="o">=</span><span class="s">15</span>
+<a id="__codelineno-12-50" name="__codelineno-12-50"></a><span class="na">INSCRIPTION_MAX_PAR_HEURE</span><span class="o">=</span><span class="s">10</span>
 </code></pre></div></td></tr></table></div>
 <p>The file containing settings specific to <strong>this installation</strong> (example 25): these vary from one machine to another (the database, its credentials) or are secret (the keys). It is never published; the file <strong><em>[.env.example]</em></strong>, which contains no secrets, serves as its template.</p>
 <ul>
@@ -7990,12 +7990,12 @@
 <span class="normal"><a href="#__codelineno-58-3">3</a></span>
 <span class="normal"><a href="#__codelineno-58-4">4</a></span>
 <span class="normal"><a href="#__codelineno-58-5">5</a></span>
-<span class="normal"><a href="#__codelineno-58-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1"></a>{
-<a id="__codelineno-58-2" name="__codelineno-58-2"></a>  "LOGIN": {
-<a id="__codelineno-58-3" name="__codelineno-58-3"></a>    "TITLE": "Connexion",
-<a id="__codelineno-58-4" name="__codelineno-58-4"></a>    ...
-<a id="__codelineno-58-5" name="__codelineno-58-5"></a>  }
-<a id="__codelineno-58-6" name="__codelineno-58-6"></a>}
+<span class="normal"><a href="#__codelineno-58-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1"></a><span class="p">{</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2"></a><span class="w">  </span><span class="nt">"LOGIN"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3"></a><span class="w">    </span><span class="nt">"TITLE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Connexion"</span><span class="p">,</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4"></a><span class="w">    </span><span class="err">...</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The <em>[Flask]</em> version “flattened” them at startup: <strong><em>[LOGIN.TITLE]</em></strong> referred to the text in <strong><em>[Connexion]</em></strong>. <em>[Laravel]</em> reads <strong>flat</strong> JSON dictionaries (example 22), where the key is the text to be translated or an identifier: We have flattened the dictionaries once and for all, and replaced the <strong><em>[{nom}]</em></strong> parameters from other versions with the notation used in <em>[Laravel]</em> and <strong><em>[:nom]</em></strong>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1">1</a></span>
@@ -8004,13 +8004,13 @@
 <span class="normal"><a href="#__codelineno-59-4">4</a></span>
 <span class="normal"><a href="#__codelineno-59-5">5</a></span>
 <span class="normal"><a href="#__codelineno-59-6">6</a></span>
-<span class="normal"><a href="#__codelineno-59-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a>{
-<a id="__codelineno-59-2" name="__codelineno-59-2"></a>    "APP.TITLE": "RdvMedecins",
-<a id="__codelineno-59-3" name="__codelineno-59-3"></a>    "APP.LOGOUT": "Se déconnecter",
-<a id="__codelineno-59-4" name="__codelineno-59-4"></a>    ...
-<a id="__codelineno-59-5" name="__codelineno-59-5"></a>    "MEDECINS.ADDED": "Le médecin :nom a été ajouté (login : :login).",
-<a id="__codelineno-59-6" name="__codelineno-59-6"></a>    ...
-<a id="__codelineno-59-7" name="__codelineno-59-7"></a>}
+<span class="normal"><a href="#__codelineno-59-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a><span class="p">{</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2"></a><span class="w">    </span><span class="nt">"APP.TITLE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RdvMedecins"</span><span class="p">,</span>
+<a id="__codelineno-59-3" name="__codelineno-59-3"></a><span class="w">    </span><span class="nt">"APP.LOGOUT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Se déconnecter"</span><span class="p">,</span>
+<a id="__codelineno-59-4" name="__codelineno-59-4"></a><span class="w">    </span><span class="err">...</span>
+<a id="__codelineno-59-5" name="__codelineno-59-5"></a><span class="w">    </span><span class="nt">"MEDECINS.ADDED"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Le médecin :nom a été ajouté (login : :login)."</span><span class="p">,</span>
+<a id="__codelineno-59-6" name="__codelineno-59-6"></a><span class="w">    </span><span class="err">...</span>
+<a id="__codelineno-59-7" name="__codelineno-59-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The files <strong><em>[lang/fr.json]</em></strong> and <strong><em>[lang/en.json]</em></strong> each contain 153 texts; they are not reproduced here. A key is represented by <strong><em>[__(&#x27;APP.LOGOUT&#x27;)]</em></strong>, and a parameterized text by <strong><em>[__(&#x27;MEDECINS.ADDED&#x27;, [&#x27;nom&#x27; =&gt; ..., &#x27;login&#x27; =&gt; ...])]</em></strong>. <em>[Laravel]</em> first searches for the complete key in the language’s dictionary, JSON; if it does not find it, it searches for it in the <em>[PHP]</em> files in the <strong><em>[lang/fr]</em></strong> folder (example 09); if that fails, it displays the key itself, which immediately signals an omission. A text entry has been added: <strong><em>[ERRORS.PAGE_EXPIRED]</em></strong>, the message on page 419, which is not present in the other versions.</p>
 <h2 id="1115-forms">11.15. <span style="color: #2e74b5">Forms</span></h2>
@@ -12414,56 +12414,56 @@
 <span class="normal"><a href="#__codelineno-94-47">47</a></span>
 <span class="normal"><a href="#__codelineno-94-48">48</a></span>
 <span class="normal"><a href="#__codelineno-94-49">49</a></span>
-<span class="normal"><a href="#__codelineno-94-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1"></a><span class="o">/*</span><span class="w"> </span><span class="o">=========================================================================</span>
-<a id="__codelineno-94-2" name="__codelineno-94-2"></a><span class="w">   </span><span class="k">public</span><span class="o">/</span><span class="n">css</span><span class="o">/</span><span class="n">styles</span><span class="p">.</span><span class="n">css</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">quelques</span><span class="w"> </span><span class="n">r</span><span class="err">églages en plus de Bootstrap</span>
-<a id="__codelineno-94-3" name="__codelineno-94-3"></a><span class="w">   </span><span class="p">(</span><span class="n">les</span><span class="w"> </span><span class="n">m</span><span class="err">êmes que dans les autres versions de cette application).</span>
-<a id="__codelineno-94-4" name="__codelineno-94-4"></a><span class="w">   </span><span class="o">=========================================================================</span><span class="w"> </span><span class="o">*/</span>
+<span class="normal"><a href="#__codelineno-94-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1"></a><span class="c">/* =========================================================================</span>
+<a id="__codelineno-94-2" name="__codelineno-94-2"></a><span class="c">   public/css/styles.css - quelques réglages en plus de Bootstrap</span>
+<a id="__codelineno-94-3" name="__codelineno-94-3"></a><span class="c">   (les mêmes que dans les autres versions de cette application).</span>
+<a id="__codelineno-94-4" name="__codelineno-94-4"></a><span class="c">   ========================================================================= */</span>
 <a id="__codelineno-94-5" name="__codelineno-94-5"></a>
-<a id="__codelineno-94-6" name="__codelineno-94-6"></a><span class="n">body</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-94-7" name="__codelineno-94-7"></a><span class="w">  </span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="w"> </span><span class="err">#f5f7fa;</span>
-<a id="__codelineno-94-8" name="__codelineno-94-8"></a><span class="err">}</span>
+<a id="__codelineno-94-6" name="__codelineno-94-6"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-94-7" name="__codelineno-94-7"></a><span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#f5f7fa</span><span class="p">;</span>
+<a id="__codelineno-94-8" name="__codelineno-94-8"></a><span class="p">}</span>
 <a id="__codelineno-94-9" name="__codelineno-94-9"></a>
-<a id="__codelineno-94-10" name="__codelineno-94-10"></a><span class="p">.</span><span class="n">creneau</span><span class="o">-</span><span class="n">libre</span><span class="p">:</span><span class="n">hover</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-94-11" name="__codelineno-94-11"></a><span class="w">  </span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="w"> </span><span class="err">#e9f7ef;</span>
-<a id="__codelineno-94-12" name="__codelineno-94-12"></a><span class="err">}</span>
+<a id="__codelineno-94-10" name="__codelineno-94-10"></a><span class="p">.</span><span class="nc">creneau-libre</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-94-11" name="__codelineno-94-11"></a><span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#e9f7ef</span><span class="p">;</span>
+<a id="__codelineno-94-12" name="__codelineno-94-12"></a><span class="p">}</span>
 <a id="__codelineno-94-13" name="__codelineno-94-13"></a>
-<a id="__codelineno-94-14" name="__codelineno-94-14"></a><span class="o">/*</span><span class="w"> </span><span class="o">-------------------------------------------------------------------------</span>
-<a id="__codelineno-94-15" name="__codelineno-94-15"></a><span class="w">   </span><span class="p">.</span><span class="n">zone</span><span class="o">-</span><span class="n">erreur</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="n">d</span><span class="c1">'erreur, en bas de page, sur fond rose léger</span>
-<a id="__codelineno-94-16" name="__codelineno-94-16"></a><span class="w">   </span><span class="p">(</span><span class="n">cf</span><span class="p">.</span><span class="w"> </span><span class="n">resources</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">fragments</span><span class="o">/</span><span class="n">erreurs</span><span class="p">.</span><span class="n">blade</span><span class="p">.</span><span class="n">php</span><span class="p">).</span>
-<a id="__codelineno-94-17" name="__codelineno-94-17"></a><span class="w">   </span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="n">sticky</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bottom</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">est</span><span class="w"> </span><span class="n">plus</span><span class="w"> </span><span class="n">haute</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">fen</span><span class="err">être (un</span>
-<a id="__codelineno-94-18" name="__codelineno-94-18"></a><span class="w">   </span><span class="n">agenda</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="n">cr</span><span class="err">éneaux, par exemple), la zone reste collée au bas de la</span>
-<a id="__codelineno-94-19" name="__codelineno-94-19"></a><span class="w">   </span><span class="n">fen</span><span class="err">être au lieu de disparaître sous la ligne de flottaison - sans jamais</span>
-<a id="__codelineno-94-20" name="__codelineno-94-20"></a><span class="w">   </span><span class="n">recouvrir</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">contenu</span><span class="w"> </span><span class="n">quand</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">est</span><span class="w"> </span><span class="n">courte</span><span class="p">.</span>
-<a id="__codelineno-94-21" name="__codelineno-94-21"></a><span class="w">   </span><span class="n">z</span><span class="o">-</span><span class="n">index</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">au</span><span class="o">-</span><span class="n">dessus</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fond</span><span class="w"> </span><span class="n">gris</span><span class="err">é de la fenêtre de réservation (.modal-backdrop).</span>
-<a id="__codelineno-94-22" name="__codelineno-94-22"></a><span class="w">   </span><span class="o">-------------------------------------------------------------------------</span><span class="w"> </span><span class="o">*/</span>
-<a id="__codelineno-94-23" name="__codelineno-94-23"></a><span class="p">.</span><span class="n">zone</span><span class="o">-</span><span class="n">erreur</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-94-24" name="__codelineno-94-24"></a><span class="w">  </span><span class="n">position</span><span class="p">:</span><span class="w"> </span><span class="n">sticky</span><span class="err">;</span>
-<a id="__codelineno-94-25" name="__codelineno-94-25"></a><span class="w">  </span><span class="n">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">rem</span><span class="err">;</span>
-<a id="__codelineno-94-26" name="__codelineno-94-26"></a><span class="w">  </span><span class="n">z</span><span class="o">-</span><span class="n">index</span><span class="p">:</span><span class="w"> </span><span class="mi">1060</span><span class="err">;</span>
-<a id="__codelineno-94-27" name="__codelineno-94-27"></a><span class="w">  </span><span class="n">margin</span><span class="o">-</span><span class="n">top</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="n">rem</span><span class="err">;</span>
-<a id="__codelineno-94-28" name="__codelineno-94-28"></a><span class="w">  </span><span class="n">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="c1">rem 1rem;</span>
-<a id="__codelineno-94-29" name="__codelineno-94-29"></a><span class="w">  </span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="w"> </span><span class="err">#fdecef; /* light pink */</span>
-<a id="__codelineno-94-30" name="__codelineno-94-30"></a><span class="w">  </span><span class="n">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">px</span><span class="w"> </span><span class="n">solid</span><span class="w"> </span><span class="err">#f5c2c7;</span>
-<a id="__codelineno-94-31" name="__codelineno-94-31"></a><span class="w">  </span><span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.375</span><span class="n">rem</span><span class="err">;</span>
-<a id="__codelineno-94-32" name="__codelineno-94-32"></a><span class="w">  </span><span class="n">color</span><span class="p">:</span><span class="w"> </span><span class="err">#842029;</span>
-<a id="__codelineno-94-33" name="__codelineno-94-33"></a><span class="err">}</span>
+<a id="__codelineno-94-14" name="__codelineno-94-14"></a><span class="c">/* -------------------------------------------------------------------------</span>
+<a id="__codelineno-94-15" name="__codelineno-94-15"></a><span class="c">   .zone-erreur : les messages d'erreur, en bas de page, sur fond rose léger</span>
+<a id="__codelineno-94-16" name="__codelineno-94-16"></a><span class="c">   (cf. resources/views/fragments/erreurs.blade.php).</span>
+<a id="__codelineno-94-17" name="__codelineno-94-17"></a><span class="c">   position: sticky + bottom : si la page est plus haute que la fenêtre (un</span>
+<a id="__codelineno-94-18" name="__codelineno-94-18"></a><span class="c">   agenda de 12 créneaux, par exemple), la zone reste collée au bas de la</span>
+<a id="__codelineno-94-19" name="__codelineno-94-19"></a><span class="c">   fenêtre au lieu de disparaître sous la ligne de flottaison - sans jamais</span>
+<a id="__codelineno-94-20" name="__codelineno-94-20"></a><span class="c">   recouvrir le contenu quand la page est courte.</span>
+<a id="__codelineno-94-21" name="__codelineno-94-21"></a><span class="c">   z-index : au-dessus du fond grisé de la fenêtre de réservation (.modal-backdrop).</span>
+<a id="__codelineno-94-22" name="__codelineno-94-22"></a><span class="c">   ------------------------------------------------------------------------- */</span>
+<a id="__codelineno-94-23" name="__codelineno-94-23"></a><span class="p">.</span><span class="nc">zone-erreur</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-94-24" name="__codelineno-94-24"></a><span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">sticky</span><span class="p">;</span>
+<a id="__codelineno-94-25" name="__codelineno-94-25"></a><span class="w">  </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<a id="__codelineno-94-26" name="__codelineno-94-26"></a><span class="w">  </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">1060</span><span class="p">;</span>
+<a id="__codelineno-94-27" name="__codelineno-94-27"></a><span class="w">  </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+<a id="__codelineno-94-28" name="__codelineno-94-28"></a><span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+<a id="__codelineno-94-29" name="__codelineno-94-29"></a><span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#fdecef</span><span class="p">;</span><span class="w"> </span><span class="c">/* light pink */</span>
+<a id="__codelineno-94-30" name="__codelineno-94-30"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#f5c2c7</span><span class="p">;</span>
+<a id="__codelineno-94-31" name="__codelineno-94-31"></a><span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.375</span><span class="kt">rem</span><span class="p">;</span>
+<a id="__codelineno-94-32" name="__codelineno-94-32"></a><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#842029</span><span class="p">;</span>
+<a id="__codelineno-94-33" name="__codelineno-94-33"></a><span class="p">}</span>
 <a id="__codelineno-94-34" name="__codelineno-94-34"></a>
-<a id="__codelineno-94-35" name="__codelineno-94-35"></a><span class="o">/*</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">patient</span><span class="c1">'s "My Account" page */</span>
-<a id="__codelineno-94-36" name="__codelineno-94-36"></a><span class="p">.</span><span class="n">carte</span><span class="o">-</span><span class="n">option</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-94-37" name="__codelineno-94-37"></a><span class="w">  </span><span class="n">transition</span><span class="p">:</span><span class="w"> </span><span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="w"> </span><span class="mf">0.15</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="w"> </span><span class="mf">0.15</span><span class="n">s</span><span class="err">;</span>
-<a id="__codelineno-94-38" name="__codelineno-94-38"></a><span class="err">}</span>
+<a id="__codelineno-94-35" name="__codelineno-94-35"></a><span class="c">/* the two main options on the patient's "My Account" page */</span>
+<a id="__codelineno-94-36" name="__codelineno-94-36"></a><span class="p">.</span><span class="nc">carte-option</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-94-37" name="__codelineno-94-37"></a><span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">border-color</span><span class="w"> </span><span class="mf">0.15</span><span class="kt">s</span><span class="p">,</span><span class="w"> </span><span class="k">box-shadow</span><span class="w"> </span><span class="mf">0.15</span><span class="kt">s</span><span class="p">;</span>
+<a id="__codelineno-94-38" name="__codelineno-94-38"></a><span class="p">}</span>
 <a id="__codelineno-94-39" name="__codelineno-94-39"></a>
-<a id="__codelineno-94-40" name="__codelineno-94-40"></a><span class="p">.</span><span class="n">carte</span><span class="o">-</span><span class="n">option</span><span class="p">:</span><span class="n">hover</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-94-41" name="__codelineno-94-41"></a><span class="w">  </span><span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span><span class="w"> </span><span class="err">#0d6efd;</span>
-<a id="__codelineno-94-42" name="__codelineno-94-42"></a><span class="w">  </span><span class="n">box</span><span class="o">-</span><span class="n">shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">0.25</span><span class="c1">rem 0.75rem rgba(13, 110, 253, 0.15);</span>
-<a id="__codelineno-94-43" name="__codelineno-94-43"></a><span class="err">}</span>
+<a id="__codelineno-94-40" name="__codelineno-94-40"></a><span class="p">.</span><span class="nc">carte-option</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-94-41" name="__codelineno-94-41"></a><span class="w">  </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#0d6efd</span><span class="p">;</span>
+<a id="__codelineno-94-42" name="__codelineno-94-42"></a><span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">0.25</span><span class="kt">rem</span><span class="w"> </span><span class="mf">0.75</span><span class="kt">rem</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">253</span><span class="p">,</span><span class="w"> </span><span class="mf">0.15</span><span class="p">);</span>
+<a id="__codelineno-94-43" name="__codelineno-94-43"></a><span class="p">}</span>
 <a id="__codelineno-94-44" name="__codelineno-94-44"></a>
-<a id="__codelineno-94-45" name="__codelineno-94-45"></a><span class="o">/*</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">CAPTCHA</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="p">(</span><span class="n">SVG</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="n">pixels</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
-<a id="__codelineno-94-46" name="__codelineno-94-46"></a><span class="p">.</span><span class="n">captcha</span><span class="o">-</span><span class="n">image</span><span class="w"> </span><span class="n">svg</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-94-47" name="__codelineno-94-47"></a><span class="w">  </span><span class="n">display</span><span class="p">:</span><span class="w"> </span><span class="n">block</span><span class="err">;</span>
-<a id="__codelineno-94-48" name="__codelineno-94-48"></a><span class="w">  </span><span class="n">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">px</span><span class="w"> </span><span class="n">solid</span><span class="w"> </span><span class="err">#dee2e6;</span>
-<a id="__codelineno-94-49" name="__codelineno-94-49"></a><span class="w">  </span><span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.375</span><span class="n">rem</span><span class="err">;</span>
-<a id="__codelineno-94-50" name="__codelineno-94-50"></a><span class="err">}</span>
+<a id="__codelineno-94-45" name="__codelineno-94-45"></a><span class="c">/* the CAPTCHA image (SVG, 150 x 50 pixels) */</span>
+<a id="__codelineno-94-46" name="__codelineno-94-46"></a><span class="p">.</span><span class="nc">captcha-image</span><span class="w"> </span><span class="nt">svg</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-94-47" name="__codelineno-94-47"></a><span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+<a id="__codelineno-94-48" name="__codelineno-94-48"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#dee2e6</span><span class="p">;</span>
+<a id="__codelineno-94-49" name="__codelineno-94-49"></a><span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mf">0.375</span><span class="kt">rem</span><span class="p">;</span>
+<a id="__codelineno-94-50" name="__codelineno-94-50"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>A few additional settings for <em>[Bootstrap]</em>, the same as in the other versions of the application.</p>
 <ul>
@@ -12559,93 +12559,93 @@
 <span class="normal"><a href="#__codelineno-95-84">84</a></span>
 <span class="normal"><a href="#__codelineno-95-85">85</a></span>
 <span class="normal"><a href="#__codelineno-95-86">86</a></span>
-<span class="normal"><a href="#__codelineno-95-87">87</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1"></a><span class="o">//</span><span class="w"> </span><span class="o">=========================================================================</span>
-<a id="__codelineno-95-2" name="__codelineno-95-2"></a><span class="o">//</span><span class="w"> </span><span class="k">public</span><span class="o">/</span><span class="n">js</span><span class="o">/</span><span class="n">app</span><span class="p">.</span><span class="n">js</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">application</span><span class="s1">'s SEUL JavaScript.</span>
-<a id="__codelineno-95-3" name="__codelineno-95-3"></a><span class="s1">// -------------------------------------------------------------------------</span>
-<a id="__codelineno-95-4" name="__codelineno-95-4"></a><span class="s1">// The entire application works without JavaScript. This script adds a</span>
-<a id="__codelineno-95-5" name="__codelineno-95-5"></a><span class="s1">// convenience feature: before submitting a form that includes the</span>
-<a id="__codelineno-95-6" name="__codelineno-95-6"></a><span class="s1">// data-confirmation="...", a modal window asks "Are you sure?"</span>
-<a id="__codelineno-95-7" name="__codelineno-95-7"></a><span class="s1">// (the window itself is located at: resources/views/fragments/confirmation.blade.php).</span>
-<a id="__codelineno-95-8" name="__codelineno-95-8"></a><span class="s1">// If JavaScript is disabled, the form simply submits without</span>
-<a id="__codelineno-95-9" name="__codelineno-95-9"></a><span class="s1">// confirmation—nothing breaks (the principle of “progressive enhancement”).</span>
-<a id="__codelineno-95-10" name="__codelineno-95-10"></a><span class="s1">//</span>
-<a id="__codelineno-95-11" name="__codelineno-95-11"></a><span class="s1">// Why not window.confirm()? Its input field doesn’t format properly, and its</span>
-<a id="__codelineno-95-12" name="__codelineno-95-12"></a><span class="s1">// buttons remain in the browser’s language, not the page’s.</span>
-<a id="__codelineno-95-13" name="__codelineno-95-13"></a><span class="s1">// =========================================================================</span>
+<span class="normal"><a href="#__codelineno-95-87">87</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1"></a><span class="c1">// =========================================================================</span>
+<a id="__codelineno-95-2" name="__codelineno-95-2"></a><span class="c1">// public/js/app.js - the application's SEUL JavaScript.</span>
+<a id="__codelineno-95-3" name="__codelineno-95-3"></a><span class="c1">// -------------------------------------------------------------------------</span>
+<a id="__codelineno-95-4" name="__codelineno-95-4"></a><span class="c1">// The entire application works without JavaScript. This script adds a</span>
+<a id="__codelineno-95-5" name="__codelineno-95-5"></a><span class="c1">// convenience feature: before submitting a form that includes the</span>
+<a id="__codelineno-95-6" name="__codelineno-95-6"></a><span class="c1">// data-confirmation="...", a modal window asks "Are you sure?"</span>
+<a id="__codelineno-95-7" name="__codelineno-95-7"></a><span class="c1">// (the window itself is located at: resources/views/fragments/confirmation.blade.php).</span>
+<a id="__codelineno-95-8" name="__codelineno-95-8"></a><span class="c1">// If JavaScript is disabled, the form simply submits without</span>
+<a id="__codelineno-95-9" name="__codelineno-95-9"></a><span class="c1">// confirmation—nothing breaks (the principle of “progressive enhancement”).</span>
+<a id="__codelineno-95-10" name="__codelineno-95-10"></a><span class="c1">//</span>
+<a id="__codelineno-95-11" name="__codelineno-95-11"></a><span class="c1">// Why not window.confirm()? Its input field doesn’t format properly, and its</span>
+<a id="__codelineno-95-12" name="__codelineno-95-12"></a><span class="c1">// buttons remain in the browser’s language, not the page’s.</span>
+<a id="__codelineno-95-13" name="__codelineno-95-13"></a><span class="c1">// =========================================================================</span>
 <a id="__codelineno-95-14" name="__codelineno-95-14"></a>
-<a id="__codelineno-95-15" name="__codelineno-95-15"></a><span class="s1">(() =&gt; {</span>
-<a id="__codelineno-95-16" name="__codelineno-95-16"></a><span class="s1">  const modale = document.getElementById('</span><span class="n">modale</span><span class="o">-</span><span class="n">confirmation</span><span class="s1">');</span>
-<a id="__codelineno-95-17" name="__codelineno-95-17"></a><span class="s1">  if (!modale) {</span>
-<a id="__codelineno-95-18" name="__codelineno-95-18"></a><span class="s1">    return;</span>
-<a id="__codelineno-95-19" name="__codelineno-95-19"></a><span class="s1">  }</span>
-<a id="__codelineno-95-20" name="__codelineno-95-20"></a><span class="s1">  const message = document.getElementById('</span><span class="n">modale</span><span class="o">-</span><span class="n">confirmation</span><span class="o">-</span><span class="n">message</span><span class="s1">');</span>
-<a id="__codelineno-95-21" name="__codelineno-95-21"></a><span class="s1">  const boutonNon = modale.querySelector('</span><span class="p">.</span><span class="n">modal</span><span class="o">-</span><span class="n">footer</span><span class="w"> </span><span class="p">[</span><span class="k">data</span><span class="o">-</span><span class="n">action</span><span class="o">=</span><span class="ss">"non"</span><span class="p">]</span><span class="s1">');</span>
+<a id="__codelineno-95-15" name="__codelineno-95-15"></a><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-16" name="__codelineno-95-16"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">modale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'modale-confirmation'</span><span class="p">);</span>
+<a id="__codelineno-95-17" name="__codelineno-95-17"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">modale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-18" name="__codelineno-95-18"></a><span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-95-19" name="__codelineno-95-19"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-95-20" name="__codelineno-95-20"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'modale-confirmation-message'</span><span class="p">);</span>
+<a id="__codelineno-95-21" name="__codelineno-95-21"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">boutonNon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modale</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.modal-footer [data-action="non"]'</span><span class="p">);</span>
 <a id="__codelineno-95-22" name="__codelineno-95-22"></a>
-<a id="__codelineno-95-23" name="__codelineno-95-23"></a><span class="s1">  let formulaireEnAttente = null; // the form to submit if you confirm</span>
-<a id="__codelineno-95-24" name="__codelineno-95-24"></a><span class="s1">  let focusPrecedent = null; // the element to focus on when closing</span>
+<a id="__codelineno-95-23" name="__codelineno-95-23"></a><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">formulaireEnAttente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// the form to submit if you confirm</span>
+<a id="__codelineno-95-24" name="__codelineno-95-24"></a><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">focusPrecedent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// the element to focus on when closing</span>
 <a id="__codelineno-95-25" name="__codelineno-95-25"></a>
-<a id="__codelineno-95-26" name="__codelineno-95-26"></a><span class="s1">  function ouvrir(formulaire) {</span>
-<a id="__codelineno-95-27" name="__codelineno-95-27"></a><span class="s1">    formulaireEnAttente = formulaire;</span>
-<a id="__codelineno-95-28" name="__codelineno-95-28"></a><span class="s1">    focusPrecedent = document.activeElement;</span>
-<a id="__codelineno-95-29" name="__codelineno-95-29"></a><span class="s1">     // textContent (not innerHTML): the message is displayed as TEXTE,</span>
-<a id="__codelineno-95-30" name="__codelineno-95-30"></a><span class="s1">     // never interpreted as HTML</span>
-<a id="__codelineno-95-31" name="__codelineno-95-31"></a><span class="s1">    message.textContent = formulaire.dataset.confirmation;</span>
-<a id="__codelineno-95-32" name="__codelineno-95-32"></a><span class="s1">    modale.classList.remove('</span><span class="n">d</span><span class="o">-</span><span class="k">none</span><span class="s1">');</span>
-<a id="__codelineno-95-33" name="__codelineno-95-33"></a><span class="s1">     // the focus moves to "No": accidentally pressing Enter does not delete anything</span>
-<a id="__codelineno-95-34" name="__codelineno-95-34"></a><span class="s1">    boutonNon.focus();</span>
-<a id="__codelineno-95-35" name="__codelineno-95-35"></a><span class="s1">  }</span>
+<a id="__codelineno-95-26" name="__codelineno-95-26"></a><span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">ouvrir</span><span class="p">(</span><span class="nx">formulaire</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-27" name="__codelineno-95-27"></a><span class="w">    </span><span class="nx">formulaireEnAttente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">formulaire</span><span class="p">;</span>
+<a id="__codelineno-95-28" name="__codelineno-95-28"></a><span class="w">    </span><span class="nx">focusPrecedent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">;</span>
+<a id="__codelineno-95-29" name="__codelineno-95-29"></a><span class="w">     </span><span class="c1">// textContent (not innerHTML): the message is displayed as TEXTE,</span>
+<a id="__codelineno-95-30" name="__codelineno-95-30"></a><span class="w">     </span><span class="c1">// never interpreted as HTML</span>
+<a id="__codelineno-95-31" name="__codelineno-95-31"></a><span class="w">    </span><span class="nx">message</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">formulaire</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">confirmation</span><span class="p">;</span>
+<a id="__codelineno-95-32" name="__codelineno-95-32"></a><span class="w">    </span><span class="nx">modale</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'d-none'</span><span class="p">);</span>
+<a id="__codelineno-95-33" name="__codelineno-95-33"></a><span class="w">     </span><span class="c1">// the focus moves to "No": accidentally pressing Enter does not delete anything</span>
+<a id="__codelineno-95-34" name="__codelineno-95-34"></a><span class="w">    </span><span class="nx">boutonNon</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+<a id="__codelineno-95-35" name="__codelineno-95-35"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-95-36" name="__codelineno-95-36"></a>
-<a id="__codelineno-95-37" name="__codelineno-95-37"></a><span class="s1">  function fermer() {</span>
-<a id="__codelineno-95-38" name="__codelineno-95-38"></a><span class="s1">    modale.classList.add('</span><span class="n">d</span><span class="o">-</span><span class="k">none</span><span class="s1">');</span>
-<a id="__codelineno-95-39" name="__codelineno-95-39"></a><span class="s1">    formulaireEnAttente = null;</span>
-<a id="__codelineno-95-40" name="__codelineno-95-40"></a><span class="s1">    if (focusPrecedent) {</span>
-<a id="__codelineno-95-41" name="__codelineno-95-41"></a><span class="s1">      focusPrecedent.focus();</span>
-<a id="__codelineno-95-42" name="__codelineno-95-42"></a><span class="s1">    }</span>
-<a id="__codelineno-95-43" name="__codelineno-95-43"></a><span class="s1">  }</span>
+<a id="__codelineno-95-37" name="__codelineno-95-37"></a><span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">fermer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-38" name="__codelineno-95-38"></a><span class="w">    </span><span class="nx">modale</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'d-none'</span><span class="p">);</span>
+<a id="__codelineno-95-39" name="__codelineno-95-39"></a><span class="w">    </span><span class="nx">formulaireEnAttente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-95-40" name="__codelineno-95-40"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">focusPrecedent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-41" name="__codelineno-95-41"></a><span class="w">      </span><span class="nx">focusPrecedent</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+<a id="__codelineno-95-42" name="__codelineno-95-42"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-95-43" name="__codelineno-95-43"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-95-44" name="__codelineno-95-44"></a>
-<a id="__codelineno-95-45" name="__codelineno-95-45"></a><span class="s1">   // 1. We intercept the submission of forms requiring confirmation</span>
-<a id="__codelineno-95-46" name="__codelineno-95-46"></a><span class="s1">  document.querySelectorAll('</span><span class="n">form</span><span class="p">[</span><span class="k">data</span><span class="o">-</span><span class="n">confirmation</span><span class="p">]</span><span class="s1">').forEach((formulaire) =&gt; {</span>
-<a id="__codelineno-95-47" name="__codelineno-95-47"></a><span class="s1">    formulaire.addEventListener('</span><span class="n">submit</span><span class="s1">', (evenement) =&gt; {</span>
-<a id="__codelineno-95-48" name="__codelineno-95-48"></a><span class="s1">      evenement.preventDefault();</span>
-<a id="__codelineno-95-49" name="__codelineno-95-49"></a><span class="s1">      ouvrir(formulaire);</span>
-<a id="__codelineno-95-50" name="__codelineno-95-50"></a><span class="s1">    });</span>
-<a id="__codelineno-95-51" name="__codelineno-95-51"></a><span class="s1">  });</span>
+<a id="__codelineno-95-45" name="__codelineno-95-45"></a><span class="w">   </span><span class="c1">// 1. We intercept the submission of forms requiring confirmation</span>
+<a id="__codelineno-95-46" name="__codelineno-95-46"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'form[data-confirmation]'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">formulaire</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-47" name="__codelineno-95-47"></a><span class="w">    </span><span class="nx">formulaire</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'submit'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-48" name="__codelineno-95-48"></a><span class="w">      </span><span class="nx">evenement</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<a id="__codelineno-95-49" name="__codelineno-95-49"></a><span class="w">      </span><span class="nx">ouvrir</span><span class="p">(</span><span class="nx">formulaire</span><span class="p">);</span>
+<a id="__codelineno-95-50" name="__codelineno-95-50"></a><span class="w">    </span><span class="p">});</span>
+<a id="__codelineno-95-51" name="__codelineno-95-51"></a><span class="w">  </span><span class="p">});</span>
 <a id="__codelineno-95-52" name="__codelineno-95-52"></a>
-<a id="__codelineno-95-53" name="__codelineno-95-53"></a><span class="s1">   // 2. The window’s buttons (Yes / No / close button)</span>
-<a id="__codelineno-95-54" name="__codelineno-95-54"></a><span class="s1">  modale.addEventListener('</span><span class="n">click</span><span class="s1">', (evenement) =&gt; {</span>
-<a id="__codelineno-95-55" name="__codelineno-95-55"></a><span class="s1">    const action = evenement.target.closest('</span><span class="p">[</span><span class="k">data</span><span class="o">-</span><span class="n">action</span><span class="p">]</span><span class="s1">')?.dataset.action;</span>
-<a id="__codelineno-95-56" name="__codelineno-95-56"></a><span class="s1">    if (action === '</span><span class="n">oui</span><span class="s1">') {</span>
-<a id="__codelineno-95-57" name="__codelineno-95-57"></a><span class="s1">      const formulaire = formulaireEnAttente;</span>
-<a id="__codelineno-95-58" name="__codelineno-95-58"></a><span class="s1">      fermer();</span>
-<a id="__codelineno-95-59" name="__codelineno-95-59"></a><span class="s1">       // formulaire.submit() submits the form SANS trigger again</span>
-<a id="__codelineno-95-60" name="__codelineno-95-60"></a><span class="s1">       // the '</span><span class="n">submit</span><span class="s1">' event: no new confirmation request</span>
-<a id="__codelineno-95-61" name="__codelineno-95-61"></a><span class="s1">      formulaire.submit();</span>
-<a id="__codelineno-95-62" name="__codelineno-95-62"></a><span class="s1">    } else if (action === '</span><span class="n">non</span><span class="s1">') {</span>
-<a id="__codelineno-95-63" name="__codelineno-95-63"></a><span class="s1">      fermer();</span>
-<a id="__codelineno-95-64" name="__codelineno-95-64"></a><span class="s1">    } else if (evenement.target.classList.contains('</span><span class="n">modal</span><span class="s1">')) {</span>
-<a id="__codelineno-95-65" name="__codelineno-95-65"></a><span class="s1">      fermer(); // Click on the grayed-out background outside the window</span>
-<a id="__codelineno-95-66" name="__codelineno-95-66"></a><span class="s1">    }</span>
-<a id="__codelineno-95-67" name="__codelineno-95-67"></a><span class="s1">  });</span>
+<a id="__codelineno-95-53" name="__codelineno-95-53"></a><span class="w">   </span><span class="c1">// 2. The window’s buttons (Yes / No / close button)</span>
+<a id="__codelineno-95-54" name="__codelineno-95-54"></a><span class="w">  </span><span class="nx">modale</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-55" name="__codelineno-95-55"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">evenement</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s1">'[data-action]'</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">action</span><span class="p">;</span>
+<a id="__codelineno-95-56" name="__codelineno-95-56"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">action</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'oui'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-57" name="__codelineno-95-57"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">formulaire</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">formulaireEnAttente</span><span class="p">;</span>
+<a id="__codelineno-95-58" name="__codelineno-95-58"></a><span class="w">      </span><span class="nx">fermer</span><span class="p">();</span>
+<a id="__codelineno-95-59" name="__codelineno-95-59"></a><span class="w">       </span><span class="c1">// formulaire.submit() submits the form SANS trigger again</span>
+<a id="__codelineno-95-60" name="__codelineno-95-60"></a><span class="w">       </span><span class="c1">// the 'submit' event: no new confirmation request</span>
+<a id="__codelineno-95-61" name="__codelineno-95-61"></a><span class="w">      </span><span class="nx">formulaire</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+<a id="__codelineno-95-62" name="__codelineno-95-62"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">action</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'non'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-63" name="__codelineno-95-63"></a><span class="w">      </span><span class="nx">fermer</span><span class="p">();</span>
+<a id="__codelineno-95-64" name="__codelineno-95-64"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'modal'</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-65" name="__codelineno-95-65"></a><span class="w">      </span><span class="nx">fermer</span><span class="p">();</span><span class="w"> </span><span class="c1">// Click on the grayed-out background outside the window</span>
+<a id="__codelineno-95-66" name="__codelineno-95-66"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-95-67" name="__codelineno-95-67"></a><span class="w">  </span><span class="p">});</span>
 <a id="__codelineno-95-68" name="__codelineno-95-68"></a>
-<a id="__codelineno-95-69" name="__codelineno-95-69"></a><span class="s1">   // 3. Keyboard: Esc closes the window; Tab keeps the focus on the window</span>
-<a id="__codelineno-95-70" name="__codelineno-95-70"></a><span class="s1">   /   / (otherwise, the focus would move to the grayed-out page behind it)</span>
-<a id="__codelineno-95-71" name="__codelineno-95-71"></a><span class="s1">  modale.addEventListener('</span><span class="n">keydown</span><span class="s1">', (evenement) =&gt; {</span>
-<a id="__codelineno-95-72" name="__codelineno-95-72"></a><span class="s1">    if (evenement.key === '</span><span class="k">Escape</span><span class="s1">') {</span>
-<a id="__codelineno-95-73" name="__codelineno-95-73"></a><span class="s1">      fermer();</span>
-<a id="__codelineno-95-74" name="__codelineno-95-74"></a><span class="s1">    } else if (evenement.key === '</span><span class="n">Tab</span><span class="s1">') {</span>
-<a id="__codelineno-95-75" name="__codelineno-95-75"></a><span class="s1">      const boutons = [...modale.querySelectorAll('</span><span class="n">button</span><span class="err">'</span><span class="p">)];</span>
-<a id="__codelineno-95-76" name="__codelineno-95-76"></a><span class="w">      </span><span class="n">const</span><span class="w"> </span><span class="n">premier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boutons</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-<a id="__codelineno-95-77" name="__codelineno-95-77"></a><span class="w">      </span><span class="n">const</span><span class="w"> </span><span class="n">dernier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boutons</span><span class="p">[</span><span class="n">boutons</span><span class="p">.</span><span class="k">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
-<a id="__codelineno-95-78" name="__codelineno-95-78"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">evenement</span><span class="p">.</span><span class="n">shiftKey</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">document</span><span class="p">.</span><span class="n">activeElement</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">premier</span><span class="p">)</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-95-79" name="__codelineno-95-79"></a><span class="w">        </span><span class="n">evenement</span><span class="p">.</span><span class="n">preventDefault</span><span class="p">();</span>
-<a id="__codelineno-95-80" name="__codelineno-95-80"></a><span class="w">        </span><span class="n">dernier</span><span class="p">.</span><span class="n">focus</span><span class="p">();</span>
-<a id="__codelineno-95-81" name="__codelineno-95-81"></a><span class="w">      </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">evenement</span><span class="p">.</span><span class="n">shiftKey</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">document</span><span class="p">.</span><span class="n">activeElement</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">dernier</span><span class="p">)</span><span class="w"> </span><span class="err">{</span>
-<a id="__codelineno-95-82" name="__codelineno-95-82"></a><span class="w">        </span><span class="n">evenement</span><span class="p">.</span><span class="n">preventDefault</span><span class="p">();</span>
-<a id="__codelineno-95-83" name="__codelineno-95-83"></a><span class="w">        </span><span class="n">premier</span><span class="p">.</span><span class="n">focus</span><span class="p">();</span>
-<a id="__codelineno-95-84" name="__codelineno-95-84"></a><span class="w">      </span><span class="err">}</span>
-<a id="__codelineno-95-85" name="__codelineno-95-85"></a><span class="w">    </span><span class="err">}</span>
-<a id="__codelineno-95-86" name="__codelineno-95-86"></a><span class="w">  </span><span class="err">}</span><span class="p">);</span>
-<a id="__codelineno-95-87" name="__codelineno-95-87"></a><span class="err">}</span><span class="p">)();</span>
+<a id="__codelineno-95-69" name="__codelineno-95-69"></a><span class="w">   </span><span class="c1">// 3. Keyboard: Esc closes the window; Tab keeps the focus on the window</span>
+<a id="__codelineno-95-70" name="__codelineno-95-70"></a><span class="w">   </span><span class="sr">/   /</span><span class="w"> </span><span class="p">(</span><span class="nx">otherwise</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">focus</span><span class="w"> </span><span class="nx">would</span><span class="w"> </span><span class="nx">move</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">grayed</span><span class="o">-</span><span class="nx">out</span><span class="w"> </span><span class="nx">page</span><span class="w"> </span><span class="nx">behind</span><span class="w"> </span><span class="nx">it</span><span class="p">)</span>
+<a id="__codelineno-95-71" name="__codelineno-95-71"></a><span class="w">  </span><span class="nx">modale</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keydown'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-72" name="__codelineno-95-72"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'Escape'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-73" name="__codelineno-95-73"></a><span class="w">      </span><span class="nx">fermer</span><span class="p">();</span>
+<a id="__codelineno-95-74" name="__codelineno-95-74"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'Tab'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-75" name="__codelineno-95-75"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">boutons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[...</span><span class="nx">modale</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'button'</span><span class="p">)];</span>
+<a id="__codelineno-95-76" name="__codelineno-95-76"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">premier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">boutons</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+<a id="__codelineno-95-77" name="__codelineno-95-77"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">dernier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">boutons</span><span class="p">[</span><span class="nx">boutons</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<a id="__codelineno-95-78" name="__codelineno-95-78"></a><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">evenement</span><span class="p">.</span><span class="nx">shiftKey</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">premier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-79" name="__codelineno-95-79"></a><span class="w">        </span><span class="nx">evenement</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<a id="__codelineno-95-80" name="__codelineno-95-80"></a><span class="w">        </span><span class="nx">dernier</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+<a id="__codelineno-95-81" name="__codelineno-95-81"></a><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">evenement</span><span class="p">.</span><span class="nx">shiftKey</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">dernier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-95-82" name="__codelineno-95-82"></a><span class="w">        </span><span class="nx">evenement</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<a id="__codelineno-95-83" name="__codelineno-95-83"></a><span class="w">        </span><span class="nx">premier</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+<a id="__codelineno-95-84" name="__codelineno-95-84"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-95-85" name="__codelineno-95-85"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-95-86" name="__codelineno-95-86"></a><span class="w">  </span><span class="p">});</span>
+<a id="__codelineno-95-87" name="__codelineno-95-87"></a><span class="p">})();</span>
 </code></pre></div></td></tr></table></div>
 <p>The only <em>[JavaScript]</em> in the application—the one from Example 21—with a few additions. The entire application works without <em>[JavaScript]</em>: this script adds convenience by providing a confirmation before submitting a form that carries the <strong><em>[data-confirmation]</em></strong> attribute. If <em>[JavaScript]</em> is disabled, the form submits without confirmation: nothing breaks (principle <strong>of progressive enhancement</strong>).</p>
 <ul>

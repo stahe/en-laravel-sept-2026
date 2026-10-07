@@ -1138,17 +1138,17 @@
 <span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-4-10">10</a></span>
-<span class="normal"><a href="#__codelineno-4-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="gh"># .env: the application configuration, specific to each installation</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a>APP_NAME="Exemple 01"
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="gh"># local: the development environment</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a>APP_ENV=local
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="gh"># the application’s secret key, created by: php artisan key:generate</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6"></a>APP_KEY=base64:g8MwuoKVJMhijOpvCTna/El25lmlLhjXCmmfqz3e3G8=
-<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="gh"># true: detailed error pages, for development (JAMAIS in production)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8"></a>APP_DEBUG=true
-<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="gh"># Sessions and cache are stored in files under the `storage` folder</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10"></a>SESSION_DRIVER=file
-<a id="__codelineno-4-11" name="__codelineno-4-11"></a>CACHE_STORE=file
+<span class="normal"><a href="#__codelineno-4-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># .env: the application configuration, specific to each installation</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="na">APP_NAME</span><span class="o">=</span><span class="s">"Exemple 01"</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1"># local: the development environment</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="na">APP_ENV</span><span class="o">=</span><span class="s">local</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="c1"># the application’s secret key, created by: php artisan key:generate</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="na">APP_KEY</span><span class="o">=</span><span class="s">base64:g8MwuoKVJMhijOpvCTna/El25lmlLhjXCmmfqz3e3G8=</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="c1"># true: detailed error pages, for development (JAMAIS in production)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="na">APP_DEBUG</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="c1"># Sessions and cache are stored in files under the `storage` folder</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="na">SESSION_DRIVER</span><span class="o">=</span><span class="s">file</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="na">CACHE_STORE</span><span class="o">=</span><span class="s">file</span>
 </code></pre></div></td></tr></table></div>
 <p>The file <strong><em>[.env]</em></strong> contains settings specific to a given installation of the application: the same application, installed on a developer’s machine and on a production server, will not have the same <strong><em>[.env]</em></strong>. Furthermore, this file must not be published with the source code (it contains secrets). Lines beginning with <strong><em>[#]</em></strong> are comments.</p>
 <ul>
@@ -1200,15 +1200,15 @@
 <span class="normal"><a href="#__codelineno-6-6">6</a></span>
 <span class="normal"><a href="#__codelineno-6-7">7</a></span>
 <span class="normal"><a href="#__codelineno-6-8">8</a></span>
-<span class="normal"><a href="#__codelineno-6-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>{
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a>    "name": "exemples/01-structure",
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a>    "description": "Exemple 01 : la structure d'une application Laravel",
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a>    "autoload": {
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a>        "psr-4": {
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a>            "App\\": "app/"
-<a id="__codelineno-6-7" name="__codelineno-6-7"></a>        }
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a>    }
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a>}
+<span class="normal"><a href="#__codelineno-6-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exemples/01-structure"</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exemple 01 : la structure d'une application Laravel"</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">    </span><span class="nt">"autoload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">        </span><span class="nt">"psr-4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">            </span><span class="nt">"App\\"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app/"</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>This is a JSON document. <em>[Laravel]</em> reads the application’s class namespace (<strong><em>[App\]</em></strong>, located in the <strong><em>[app/]</em></strong> folder) from this file, which it needs, for example, to distinguish the application’s code from the framework’s code in its error pages. The <strong><em>[composer.json]</em></strong> file for a standard project also contains the list of its libraries; for the examples, this list is in the <strong><em>[exemples/composer.json]</em></strong> file (see introduction).</p>
 <h3 id="216-execution">2.1.6. <span style="color: #1f4d78">Execution</span></h3>
@@ -1668,20 +1668,20 @@
 <span class="normal"><a href="#__codelineno-30-11">11</a></span>
 <span class="normal"><a href="#__codelineno-30-12">12</a></span>
 <span class="normal"><a href="#__codelineno-30-13">13</a></span>
-<span class="normal"><a href="#__codelineno-30-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="mo">03</span><span class="o">-</span><span class="n">reponses</span><span class="o">/</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="err">├──</span><span class="w"> </span><span class="n">app</span><span class="o">/</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Http</span><span class="o">/</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Controllers</span><span class="o">/</span>
-<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">ReponsesController</span><span class="p">.</span><span class="na">php</span>
-<a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">Middleware</span><span class="o">/</span>
-<a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="n">JsonLisible</span><span class="p">.</span><span class="na">php</span>
-<a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">Models</span><span class="o">/</span>
-<a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="n">Personne</span><span class="p">.</span><span class="na">php</span>
-<a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="err">├──</span><span class="w"> </span><span class="n">bootstrap</span><span class="o">/</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">app</span><span class="p">.</span><span class="na">php</span>
-<a id="__codelineno-30-12" name="__codelineno-30-12"></a><span class="err">├──</span><span class="w"> </span><span class="n">routes</span><span class="o">/</span>
-<a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">web</span><span class="p">.</span><span class="na">php</span>
-<a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="err">└──</span><span class="w"> </span><span class="p">...</span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a>03-reponses/
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a>├── app/
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a>│   ├── Http/
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a>│   │   ├── Controllers/
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a>│   │   │   └── ReponsesController.php
+<a id="__codelineno-30-6" name="__codelineno-30-6"></a>│   │   └── Middleware/
+<a id="__codelineno-30-7" name="__codelineno-30-7"></a>│   │       └── JsonLisible.php
+<a id="__codelineno-30-8" name="__codelineno-30-8"></a>│   └── Models/
+<a id="__codelineno-30-9" name="__codelineno-30-9"></a>│       └── Personne.php
+<a id="__codelineno-30-10" name="__codelineno-30-10"></a>├── bootstrap/
+<a id="__codelineno-30-11" name="__codelineno-30-11"></a>│   └── app.php
+<a id="__codelineno-30-12" name="__codelineno-30-12"></a>├── routes/
+<a id="__codelineno-30-13" name="__codelineno-30-13"></a>│   └── web.php
+<a id="__codelineno-30-14" name="__codelineno-30-14"></a>└── ...
 </code></pre></div></td></tr></table></div>
 <p>The routing table maps each URL and <strong><em>[/reponses/xxx]</em></strong> to the controller action <strong><em>[xxx]</em></strong>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
@@ -2170,10 +2170,10 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1">1</a></span>
 <span class="normal"><a href="#__codelineno-50-2">2</a></span>
 <span class="normal"><a href="#__codelineno-50-3">3</a></span>
-<span class="normal"><a href="#__codelineno-50-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="o">[</span><span class="mi">2026</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">26</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">36</span><span class="o">]</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="na">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Une</span><span class="w"> </span><span class="n">erreur</span><span class="w"> </span><span class="n">imprévue</span><span class="w"> </span><span class="p">{</span><span class="s">"exception"</span><span class="p">:</span><span class="s">"[object] (RuntimeException(code: 0): Une erreur imprévue at .../exemples/03-reponses/app/Http/Controllers/ReponsesController.php:79)</span>
-<a id="__codelineno-50-2" name="__codelineno-50-2"></a><span class="s">[stacktrace]</span>
-<a id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="s">#0 .../vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\\Http\\Controllers\\ReponsesController-&gt;error()</span>
-<a id="__codelineno-50-4" name="__codelineno-50-4"></a><span class="s">...</span>
+<span class="normal"><a href="#__codelineno-50-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a>[2026-09-26 15:51:36] local.ERROR: Une erreur imprévue {"exception":"[object] (RuntimeException(code: 0): Une erreur imprévue at .../exemples/03-reponses/app/Http/Controllers/ReponsesController.php:79)
+<a id="__codelineno-50-2" name="__codelineno-50-2"></a>[stacktrace]
+<a id="__codelineno-50-3" name="__codelineno-50-3"></a>#0 .../vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(46): App\\Http\\Controllers\\ReponsesController-&gt;error()
+<a id="__codelineno-50-4" name="__codelineno-50-4"></a>...
 </code></pre></div></td></tr></table></div>
 <p>Without debug mode (<strong><em>[APP_DEBUG=false]</em></strong> in <strong><em>[.env]</em></strong>), the same request produces a brief error page, “500 | Server Error,” which reveals nothing about the code; the error is described only in the log. Chapter 7 will show how to display an application-specific error page.</p>
 <h2 id="24-example-04-redirects">2.4. <span style="color: #2e74b5">Example 04: Redirects</span></h2>
@@ -2331,18 +2331,18 @@
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>Location: http://localhost:8000/new
 <a id="__codelineno-54-3" name="__codelineno-54-3"></a>Content-Type: text/html; charset=utf-8
 <a id="__codelineno-54-4" name="__codelineno-54-4"></a>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7"></a>    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-<a id="__codelineno-54-8" name="__codelineno-54-8"></a>        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"UTF-8"</span> <span class="p">/&gt;</span>
-<a id="__codelineno-54-9" name="__codelineno-54-9"></a>        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"refresh"</span> <span class="na">content</span><span class="o">=</span><span class="s">"0;url='http://localhost:8000/nouvelle'"</span> <span class="p">/&gt;</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a>&lt;!DOCTYPE html&gt;
+<a id="__codelineno-54-6" name="__codelineno-54-6"></a>&lt;html&gt;
+<a id="__codelineno-54-7" name="__codelineno-54-7"></a>    &lt;head&gt;
+<a id="__codelineno-54-8" name="__codelineno-54-8"></a>        &lt;meta charset="UTF-8" /&gt;
+<a id="__codelineno-54-9" name="__codelineno-54-9"></a>        &lt;meta http-equiv="refresh" content="0;url='http://localhost:8000/nouvelle'" /&gt;
 <a id="__codelineno-54-10" name="__codelineno-54-10"></a>
-<a id="__codelineno-54-11" name="__codelineno-54-11"></a>        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Redirecting to http://localhost:8000/new<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-<a id="__codelineno-54-12" name="__codelineno-54-12"></a>    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13"></a>    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14"></a>        Redirecting to <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"http://localhost:8000/nouvelle"</span><span class="p">&gt;</span>http://localhost:8000/new<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.
-<a id="__codelineno-54-15" name="__codelineno-54-15"></a>    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<a id="__codelineno-54-11" name="__codelineno-54-11"></a>        &lt;title&gt;Redirecting to http://localhost:8000/new&lt;/title&gt;
+<a id="__codelineno-54-12" name="__codelineno-54-12"></a>    &lt;/head&gt;
+<a id="__codelineno-54-13" name="__codelineno-54-13"></a>    &lt;body&gt;
+<a id="__codelineno-54-14" name="__codelineno-54-14"></a>        Redirecting to &lt;a href="http://localhost:8000/nouvelle"&gt;http://localhost:8000/new&lt;/a&gt;.
+<a id="__codelineno-54-15" name="__codelineno-54-15"></a>    &lt;/body&gt;
+<a id="__codelineno-54-16" name="__codelineno-54-16"></a>&lt;/html&gt;
 </code></pre></div></td></tr></table></div>
 <p><em>[Laravel]</em> converted the address <strong><em>[/nouvelle]</em></strong> into an <strong>absolute</strong> address (including the protocol, host, and port), calculated from the received request. The response also includes a short body, HTML, for a client that does not follow redirects. The option <strong><em>[-L]</em></strong> from <em>[curl]</em> follows the redirect, just as a browser would:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a>curl -L http://localhost:8000/old

@@ -1340,11 +1340,11 @@
 <span class="normal"><a href="#__codelineno-14-5">5</a></span>
 <span class="normal"><a href="#__codelineno-14-6">6</a></span>
 <span class="normal"><a href="#__codelineno-14-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>...
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a>        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert alert-danger"</span><span class="p">&gt;</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a>    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"h4"</span><span class="p">&gt;</span>Erreur 404<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4"></a>    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-0"</span><span class="p">&gt;</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a>       Page introuvable.     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>        &lt;div class="alert alert-danger"&gt;
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>    &lt;h1 class="h4"&gt;Erreur 404&lt;/h1&gt;
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a>    &lt;p class="mb-0"&gt;
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a>       Page introuvable.     &lt;/p&gt;
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a>  &lt;/div&gt;
 <a id="__codelineno-14-7" name="__codelineno-14-7"></a>...
 </code></pre></div></td></tr></table></div>
 <p>Let’s focus on the essentials. Route middleware is the right place for checks common to many actions (is the user logged in? Do they have permission to access this action?): the next chapter uses it for authentication. Exception handlers and views (<strong><em>[errors/...])</em></strong> ensure that the user never sees a technical page, regardless of the error: the case study takes advantage of this.</p>

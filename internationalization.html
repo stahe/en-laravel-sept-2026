@@ -871,17 +871,17 @@
 <span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>    "MENU.ACCUEIL": "Accueil",
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>    "MENU.PRODUITS": "Produits",
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a>    "ACCUEIL.TITRE": "Bienvenue",
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>    "ACCUEIL.BONJOUR": "Bonjour :nom !",
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>    "ACCUEIL.DATE": "Nous sommes le :date.",
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>    "PRODUITS.TITRE": "Nos produits",
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>    "PRODUITS.NOM": "Produit",
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>    "PRODUITS.PRIX": "Prix",
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a>    "PRODUITS.NOMBRE": ":n produit(s) au catalogue."
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a>}
+<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nt">"MENU.ACCUEIL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accueil"</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nt">"MENU.PRODUITS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produits"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nt">"ACCUEIL.TITRE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bienvenue"</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nt">"ACCUEIL.BONJOUR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bonjour :nom !"</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="nt">"ACCUEIL.DATE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nous sommes le :date."</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="nt">"PRODUITS.TITRE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nos produits"</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nt">"PRODUITS.NOM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produit"</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="nt">"PRODUITS.PRIX"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prix"</span><span class="p">,</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="nt">"PRODUITS.NOMBRE"</span><span class="p">:</span><span class="w"> </span><span class="s2">":n produit(s) au catalogue."</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>A JSON dictionary is an object in which each pair associates a key with its text. Keys are grouped by theme based on their prefix: the menu text “Home” has the key <strong><em>[MENU.ACCUEIL]</em></strong>. A text may contain <strong>placeholders</strong>, written as <strong><em>[:nom]</em></strong>, which are replaced during translation. (The dictionaries in the other versions of the case study nest the objects JSON — <strong><em>[{&quot;MENU&quot;: {&quot;ACCUEIL&quot;: &quot;Accueil&quot;}}]</em></strong> — and write the parameters as <strong><em>[{nom}]</em></strong>; those in <em>[Laravel]</em> are “flat” and use the <strong><em>[:nom]</em></strong> syntax.) The <strong><em>[lang/en.json]</em></strong> file has exactly the same keys:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
@@ -894,17 +894,17 @@
 <span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>    "MENU.ACCUEIL": "Home",
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a>    "MENU.PRODUITS": "Products",
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a>    "ACCUEIL.TITRE": "Welcome",
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a>    "ACCUEIL.BONJOUR": "Hello :nom!",
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a>    "ACCUEIL.DATE": "Today is :date.",
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a>    "PRODUITS.TITRE": "Our products",
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a>    "PRODUITS.NOM": "Product",
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a>    "PRODUITS.PRIX": "Price",
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a>    "PRODUITS.NOMBRE": ":n product(s) in the catalogue."
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a>}
+<span class="normal"><a href="#__codelineno-2-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="nt">"MENU.ACCUEIL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="nt">"MENU.PRODUITS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Products"</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="nt">"ACCUEIL.TITRE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Welcome"</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">"ACCUEIL.BONJOUR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello :nom!"</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="nt">"ACCUEIL.DATE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Today is :date."</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="nt">"PRODUITS.TITRE"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our products"</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nt">"PRODUITS.NOM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product"</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nt">"PRODUITS.PRIX"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Price"</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="nt">"PRODUITS.NOMBRE"</span><span class="p">:</span><span class="w"> </span><span class="s2">":n product(s) in the catalogue."</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>If a key is missing from the JSON dictionary for the current language, it is searched for in the <em>[PHP]</em> files in that language’s folder (<strong><em>[lang/fr/*.php]</em></strong>, example 09), and then in those for the fallback language (<strong><em>[APP_FALLBACK_LOCALE]</em></strong>, English by default). There is no backup dictionary (JSON): a key missing from the current language’s dictionary (JSON) and from these files is displayed as-is. This way, any omission is immediately visible on the screen.</p>
 <h3 id="512-the-language-of-each-request-apphttpmiddlewaredefinirlanguephp">5.1.2. <span style="color: #1f4d78">The language of each request: app/Http/Middleware/DefinirLangue.php</span></h3>
